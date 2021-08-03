@@ -1,2 +1,3 @@
 theme: jekyll-theme-slate
 title: Reasoning Agents Final Project
+permalink: /:year/:month/:day/:title/
