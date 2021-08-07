@@ -14,7 +14,7 @@ The whole implementation revolves around the mix-initiative controller:
 
 where the total controller is the sum of the navigation control and the user control, weighted by a gain of the form:
 
-<img src="https://render.githubusercontent.com/render/math?math=\kappa(x,\Pi)\triangleq \frac{\rho(d_t-d_s)}{\rho(d_t-d_s)+\rho(\epsilon+d_s-d_t)}">
+<img src="https://render.githubusercontent.com/render/math?math=\kappa(x,\Pi)\triangleq \frac{\rho(d_t-d_s)}{\rho(d_t-d_s) + \rho(\epsilon+d_s-d_t)}">
 
 ```
 def smooth_mix(tele_control, navi_control, dist_to_trap):
