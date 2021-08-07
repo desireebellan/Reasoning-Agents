@@ -7,7 +7,7 @@ This repository consitutes the final project for the course "Reasoning Agents" (
 [[1]](#1)
 ## Simulations
 *Here will go the explaination of the most important part of the code, what we took from pre existing works and what we implemented*
-'''
+```
 def smooth_mix(tele_control, navi_control, dist_to_trap):
     ds = 0.4
     epsilon = 0.1
@@ -16,7 +16,7 @@ def smooth_mix(tele_control, navi_control, dist_to_trap):
     mix_control = navi_control + gain*tele_control
     #mix_control = (1-gain)*navi_control + gain*tele_control
     return mix_control, gain
-'''
+```
 ## Results
 *graphs, gifs, photos...*
 ## References
