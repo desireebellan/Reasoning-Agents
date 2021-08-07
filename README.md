@@ -7,6 +7,10 @@ This repository consitutes the final project for the course "Reasoning Agents" (
 [[1]](#1)
 ## Simulations
 *Here will go the explaination of the most important part of the code, what we took from pre existing works and what we implemented*
+
+The whole implementation revolves around the mix-initiative controller:
+
+<img src="https://render.githubusercontent.com/render/math?math=u\triangleq -1">
 ```
 def smooth_mix(tele_control, navi_control, dist_to_trap):
     ds = 0.4
