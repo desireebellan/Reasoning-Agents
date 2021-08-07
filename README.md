@@ -10,7 +10,7 @@ This repository consitutes the final project for the course "Reasoning Agents" (
 
 The whole implementation revolves around the mix-initiative controller:
 
-<img src="https://render.githubusercontent.com/render/math?math=u\triangleq u_r(x,\pi_s, \pi_g)">
+<img src="https://render.githubusercontent.com/render/math?math=u\triangleq u_r(x,\pi_s, \pi_g)+\kappa(x,\Pi)u_h(t)">
 
 ```
 def smooth_mix(tele_control, navi_control, dist_to_trap):
