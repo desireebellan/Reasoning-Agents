@@ -5,7 +5,7 @@ This repository consitutes the final project for the course "Reasoning Agents" (
 ## Preliminary Theory
 ## Problem formulation
 [[1]](#1)
-## Simulations
+
 *Here will go the explaination of the most important part of the code, what we took from pre existing works and what we implemented*
 
 The whole implementation revolves around the mix-initiative controller:
@@ -25,6 +25,9 @@ def smooth_mix(tele_control, navi_control, dist_to_trap):
     mix_control = navi_control + gain*tele_control
     return mix_control, gain
 ```
+
+## Simulations
+
 ## Results
 *graphs, gifs, photos...*
 ## References
