@@ -19,7 +19,6 @@ def smooth_mix(tele_control, navi_control, dist_to_trap):
     mix_control = 0
     gain = rho(dist_to_trap-ds)/(rho(dist_to_trap-ds)+rho(epsilon+ds-dist_to_trap))
     mix_control = navi_control + gain*tele_control
-    #mix_control = (1-gain)*navi_control + gain*tele_control
     return mix_control, gain
 ```
 ## Results
