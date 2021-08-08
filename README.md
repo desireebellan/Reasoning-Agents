@@ -60,6 +60,54 @@ class ltl_planner(object):
 	def __init__(self, ts, hard_spec, soft_spec, beta)
 
 ```
+```
+The optimal initial path is computed through a nested Dijkstra's search:
+def dijkstra_plan_networkX(product, beta=10):
+	# requires a full construct of product automaton
+	start = time.time()
+	runs = {}
+	loop = {}
+	# minimal circles
+	for prod_target in product.graph['accept']:
+                #print 'prod_target', prod_target
+                # accepting state in self-loop
+                if prod_target in product.predecessors(prod_target):
+                        loop[prod_target] = (product.edge[prod_target][prod_target]["weight"], [prod_target, prod_target])
+                        continue
+                else:
+                        cycle = {}
+                        loop_pre, loop_dist = dijkstra_predecessor_and_distance(product, prod_target)
+                        for target_pred in product.predecessors_iter(prod_target):
+                                if target_pred in loop_dist:
+                                        cycle[target_pred] = product.edge[target_pred][prod_target]["weight"] + loop_dist[target_pred]
+                        if cycle:
+                                opti_pred = min(cycle, key = cycle.get)
+                                suffix = compute_path_from_pre(loop_pre, opti_pred)
+                                loop[prod_target] = (cycle[opti_pred], suffix)
+	# shortest line
+	for prod_init in product.graph['initial']:
+                line = {}
+		line_pre, line_dist = dijkstra_predecessor_and_distance(product, prod_init)
+		for target in loop.iterkeys():
+			if target in line_dist:
+				line[target] = line_dist[target]+beta*loop[target][0]
+		if line:
+			opti_targ = min(line, key = line.get)
+			prefix = compute_path_from_pre(line_pre, opti_targ)
+			precost = line_dist[opti_targ]
+			runs[(prod_init, opti_targ)] = (prefix, precost, loop[opti_targ][1], loop[opti_targ][0])
+	# best combination
+	if runs:
+		prefix, precost, suffix, sufcost = min(runs.values(), key = lambda p: p[1] + beta*p[3])
+		run = ProdAut_Run(product, prefix, precost, suffix, sufcost, precost+beta*sufcost)
+		print '=================='
+		print 'Dijkstra_plan_networkX done within %.2fs: precost %.2f, sufcost %.2f' %(time.time()-start, precost, sufcost)
+		return run, time.time()-start
+		#print '\n==================\n'
+	print '=================='        
+	print 'No accepting run found in optimal planning!'
+        return None, None
+```
 
 ## Simulations
 
