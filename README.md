@@ -53,7 +53,7 @@ def smooth_mix(tele_control, navi_control, dist_to_trap):
     mix_control[1] = (1-gain)*navi_control[1] + gain*tele_control[1]
     return mix_control, gain
 ```
-Robot informations and main function are hold inside the class:
+Robot informations and main function are hold inside the class ltl_planner:
 
 ```
 class ltl_planner(object):
@@ -63,14 +63,8 @@ class ltl_planner(object):
 ```
 The optimal initial path is computed through a nested Dijkstra's search:
 def dijkstra_plan_networkX(product, beta=10):
-	# requires a full construct of product automaton
-	start = time.time()
-	runs = {}
-	loop = {}
-	# minimal circles
+	...
 	for prod_target in product.graph['accept']:
-                #print 'prod_target', prod_target
-                # accepting state in self-loop
                 if prod_target in product.predecessors(prod_target):
                         loop[prod_target] = (product.edge[prod_target][prod_target]["weight"], [prod_target, prod_target])
                         continue
@@ -100,13 +94,7 @@ def dijkstra_plan_networkX(product, beta=10):
 	if runs:
 		prefix, precost, suffix, sufcost = min(runs.values(), key = lambda p: p[1] + beta*p[3])
 		run = ProdAut_Run(product, prefix, precost, suffix, sufcost, precost+beta*sufcost)
-		print '=================='
-		print 'Dijkstra_plan_networkX done within %.2fs: precost %.2f, sufcost %.2f' %(time.time()-start, precost, sufcost)
-		return run, time.time()-start
-		#print '\n==================\n'
-	print '=================='        
-	print 'No accepting run found in optimal planning!'
-        return None, None
+		....
 ```
 
 ## Simulations
