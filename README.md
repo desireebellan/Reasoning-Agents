@@ -39,6 +39,21 @@ def smooth_mix(tele_control, navi_control, dist_to_trap):
     return mix_control, gain
 ```
 
+```
+def smooth_mix(tele_control, navi_control, dist_to_trap):
+    if tele_control[0] > 0.4:
+        tele_control[0] = 0.4
+    ds = 2.5
+    epsilon = 0.5
+    mix_control = [0, 0]
+    gain = rho(dist_to_trap-ds)/(rho(dist_to_trap-ds)+rho(epsilon+ds-dist_to_trap))
+    # mix_control[0] = navi_control[0] + gain*tele_control[0]
+    # mix_control[1] = navi_control[1] + gain*tele_control[1]
+    mix_control[0] = (1-gain)*navi_control[0] + gain*tele_control[0]
+    mix_control[1] = (1-gain)*navi_control[1] + gain*tele_control[1]
+    return mix_control, gain
+```
+
 ## Simulations
 
 ## Results
