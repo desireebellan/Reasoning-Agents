@@ -16,6 +16,8 @@ where the total controller is the sum of the navigation control and the user con
 
 <img src="https://render.githubusercontent.com/render/math?math=\kappa(x,\Pi)\triangleq \frac{\rho(d_t-d_s)}{\rho(d_t-d_s) %2B \rho(\epsilon+d_s-d_t)}">
 
+utility/mix_u/mix_u.py
+
 ```
 def smooth_mix(tele_control, navi_control, dist_to_trap):
     ds = 0.4
@@ -25,6 +27,7 @@ def smooth_mix(tele_control, navi_control, dist_to_trap):
     mix_control = navi_control + gain*tele_control
     return mix_control, gain
 ```
+hil_mix_control/src/hil_mix_planner_turtlebot.py
 
 ```
 def smooth_mix(tele_control, navi_control, dist_to_trap):
@@ -32,12 +35,11 @@ def smooth_mix(tele_control, navi_control, dist_to_trap):
     epsilon = 0.1
     mix_control = [0, 0]
     gain = rho(dist_to_trap-ds)/(rho(dist_to_trap-ds)+rho(epsilon+ds-dist_to_trap))
-    # mix_control[0] = navi_control[0] + gain*tele_control[0]
-    # mix_control[1] = navi_control[1] + gain*tele_control[1]
     mix_control[0] = (1-gain)*navi_control[0] + gain*tele_control[0]
     mix_control[1] = (1-gain)*navi_control[1] + gain*tele_control[1]
     return mix_control, gain
 ```
+hil_mix_control/src/hil_mix_planner_tiago.py
 
 ```
 def smooth_mix(tele_control, navi_control, dist_to_trap):
@@ -47,8 +49,6 @@ def smooth_mix(tele_control, navi_control, dist_to_trap):
     epsilon = 0.5
     mix_control = [0, 0]
     gain = rho(dist_to_trap-ds)/(rho(dist_to_trap-ds)+rho(epsilon+ds-dist_to_trap))
-    # mix_control[0] = navi_control[0] + gain*tele_control[0]
-    # mix_control[1] = navi_control[1] + gain*tele_control[1]
     mix_control[0] = (1-gain)*navi_control[0] + gain*tele_control[0]
     mix_control[1] = (1-gain)*navi_control[1] + gain*tele_control[1]
     return mix_control, gain
