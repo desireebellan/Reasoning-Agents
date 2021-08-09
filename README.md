@@ -117,3 +117,12 @@ export TURTLEBOT3_MODEL=burger
 cd ~/catkin_ws/src/turtlebot3_simulations
 roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
 ```
+
+* Open a second terminal in the directory of mix_initiative and type:
+```
+mkdir src
+cd src
+catkin_init_workspace
+cd ..
+catkin_make
+```
