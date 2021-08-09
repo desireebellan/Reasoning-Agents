@@ -108,3 +108,12 @@ Guo, M., Andersson, S. et al..
 2018 IEEE International Conference on Robotics and Automation (ICRA)(2018).
 ## Instructions
 *Here will go the intructions to compile and execute the various simulations*
+### Turltebot simulations
+* Install ROS and the turtlebot package following the instructions [here](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/) (select the correct release of ROS according to you're need).
+* Open a terminal and type:
+```
+source ~/catkin_ws/devel/setup.bash
+export TURTLEBOT3_MODEL=burger
+cd ~/catkin_ws/src/turtlebot3_simulations
+roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
+```
