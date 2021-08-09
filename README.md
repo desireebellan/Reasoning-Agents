@@ -124,5 +124,5 @@ mkdir src
 cd src
 catkin_init_workspace
 cd ..
-catkin_make
+catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3
 ```
