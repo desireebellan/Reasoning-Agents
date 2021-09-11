@@ -109,20 +109,13 @@ Guo, M., Andersson, S. et al..
 ## Instructions
 *Here will go the intructions to compile and execute the various simulations*
 ### Turltebot simulations
-* Install ROS and the turtlebot package following the instructions [here](https://emanual.robotis.com/docs/en/platform/turtlebot3/quick-start/) (select the correct release of ROS according to you're need).
-* Open a terminal and type:
+* Install ROS [here](http://wiki.ros.org/ROS/Installation)(choose the release that best fits your distro)
+* Clone the turtlebot3, turtlebot3_msg and turtlebot3_simulations packages inside ~/catking_ws/src
 ```
-source ~/catkin_ws/devel/setup.bash
-export TURTLEBOT3_MODEL=burger
-cd ~/catkin_ws/src/turtlebot3_simulations
-roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
-```
-
-* Open a second terminal in the directory of mix_initiative and type:
-```
-mkdir src
-cd src
-catkin_init_workspace
+~/catkin_ws/src
+git clone https://github.com/ROBOTIS-GIT/turtlebot3.git -b -{melodic|noetic}-devel
+git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git -b -{melodic|noetic}-devel
+git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
 cd ..
-catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3
+catkin_make
 ```
