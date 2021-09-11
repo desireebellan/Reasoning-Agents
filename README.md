@@ -108,7 +108,7 @@ Guo, M., Andersson, S. et al..
 2018 IEEE International Conference on Robotics and Automation (ICRA)(2018).
 ## Instructions
 *Here will go the intructions to compile and execute the various simulations*
-### Turltebot simulations
+### TURTLEBOT simulations
 * Install ROS [here](http://wiki.ros.org/ROS/Installation)(choose the release that best fits your distro)
 * Clone the turtlebot3, turtlebot3_msg and turtlebot3_simulations packages inside ~/catking_ws/src
 ```
@@ -118,4 +118,9 @@ git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git -b -{melodic|noetic
 git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
 cd ..
 catkin_make
+```
+### Solved Issues
+* If turtlebot3_teleop does not work with gazebo, try to reinstall gazebo_ros_pkgs
+```
+sudo apt-get install ros-{melodic|noetic}-gazebo-ros-pkgs ros-{melodic|noetic}-gazebo-ros-control
 ```
