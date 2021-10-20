@@ -52,6 +52,10 @@ source ~/.bashrc
 ```
 roslaunch turtlebot3_gazebo turtlebot3_gazebo_wolrd wolrd:=
 ```
+### TIAGO simulations
+
+### 2D grid simulations
+
 ### Solved Issues
 * If turtlebot3_teleop does not work with gazebo, try to reinstall gazebo_ros_pkgs
 ```
