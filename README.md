@@ -36,6 +36,15 @@ git clone https://github.com/ROBOTIS-GIT/turtlebot3.git -b -{melodic|noetic}-dev
 git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git -b -{melodic|noetic}-devel
 git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
 ```
+* Modify the source file to use the BURGER model:
+Open the file from terminal
+```
+gedit ~/.bashrc
+```
+Copy paste the following instructions:
+```
+export TURTLEBOT3_MODEL=burger
+```
 * Clone this repository and build 
 ```
 cd ~/catkin_ws/src
@@ -43,14 +52,14 @@ git clone ...
 cd ..
 catkin_make
 ```
-* Inside the directory ~/catkin_ws source the environment defined in the prrvious step
+* Inside the directory ~/catkin_ws source the environment defined in the previous step
 ```
 cd ~/catkin_ws
 source ~/.bashrc
 ```
 * Run the following instructions on different terminals
 ```
-roslaunch turtlebot3_gazebo turtlebot3_gazebo_wolrd wolrd:=
+roslaunch mix_initiative_turtlebot turtlebot3_hotel.launch
 ```
 ### TIAGO simulations
 
