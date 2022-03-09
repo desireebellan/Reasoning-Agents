@@ -37,6 +37,7 @@ git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git -b -{melodic|noetic
 git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
 ```
 * Modify the source file to use the BURGER model:
+
 Open the file from terminal
 ```
 gedit ~/.bashrc
