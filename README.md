@@ -31,7 +31,7 @@ In order to evaluate the simulations done, we plotted the trajectories followed 
 - [ROS Melodic] on Ubuntu 18.04 for TIAGO
 
 ## Documentation
-You can read the technical report [here](https://github.com/calisir/ImportantPeople/blob/master/Report.pdf).
+You can read the technical report [here]().
 
 We have used the Test World made by Chao Yao [here](https://github.com/chaolmu/gazebo_models_worlds_collection).
 
