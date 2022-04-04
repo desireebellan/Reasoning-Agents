@@ -1,5 +1,5 @@
 # Human-in-the-Loop
-[![report](https://img.shields.io/badge/Report-pdf-lightgrey)](https://nbviewer.jupyter.org/github/calisir/ImportantPeople/blob/master/Report.pdf) [![slides](https://img.shields.io/badge/Slides-ppt-blue)](https://docs.google.com/presentation/d/1pXiUyEJBQXn544ccQ9Zc2mMWiKWK_wbwZZQxDHpQRqc/edit?usp=sharing) 
+[![report](https://img.shields.io/badge/Report-pdf-lightgrey)]() [![slides](https://img.shields.io/badge/Slides-ppt-blue)]() 
 This work describes the analysis and design choices on building a human-in-the-loop mixed-
 initiative control under temporal tasks. This project is part of the Reasoning Agents course
 under the Electives in Artificial Intelligence course hosted at the Sapienza University of Rome and instructed by Professor Giuseppe De Giacomo.
