@@ -1,7 +1,7 @@
 # Human-in-the-Loop
 [![report](https://img.shields.io/badge/Report-pdf-lightgrey)]() [![slides](https://img.shields.io/badge/Slides-ppt-blue)]() 
 
-This project aims to describe the design and implementation choices for the development of a human-in-the-loop mixed initiative control under temporal tasks. In particular the algorithm implemented is insipred by the solution described in the paper <a id="1">[1]</a> .
+This project aims to describe the design and implementation choices for the development of a human-in-the-loop mixed initiative control under temporal tasks. In particular the algorithm implemented is insipred by the solution described in the paper [1] in [References](#references).
 
 
 
