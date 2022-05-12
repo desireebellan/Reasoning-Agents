@@ -1,8 +1,7 @@
 # Human-in-the-Loop
 [![report](https://img.shields.io/badge/Report-pdf-lightgrey)]() [![slides](https://img.shields.io/badge/Slides-ppt-blue)]() 
-This work describes the analysis and design choices on building a human-in-the-loop mixed-
-initiative control under temporal tasks. This project is part of the Reasoning Agents course
-under the Electives in Artificial Intelligence course hosted at the Sapienza University of Rome and instructed by Professor Giuseppe De Giacomo.
+
+This project aims to describe the design and implementation choices for the development of a human-in-the-loop mixed initiative control under temporal tasks. In particular the algorithm implemented is insipred by the solution described in the paper <a id="1">[1]</a> .
 
 
 
