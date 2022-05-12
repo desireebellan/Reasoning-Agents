@@ -1,13 +1,11 @@
 # Human-in-the-Loop
 [![report](https://img.shields.io/badge/Report-pdf-lightgrey)]() [![slides](https://img.shields.io/badge/Slides-ppt-blue)]() 
 
-This project aims to describe the design and implementation choices for the development of a human-in-the-loop mixed initiative control under temporal tasks.
-We analyzed pre-existing techniques through 3D and 2D simulations on various environments, particularly how the presence of a human operator can change to plan edges, both temporarily and permanently.
+This work describes the analysis and design choices on building a human-in-the-loop mixed-initiative control under temporal tasks. We analyzed pre-existing techniques through 3D and 2D simulations on various environments, particularly how the presence of a human operator can change to plan edges, both temporarily and permanently.
 
-
+Our effort was jointly of literary revision and experimentation, whose detailed description can be read in the attached paper. Below a brief peek of the contents: we delve first into previous works conducted in the field to understand its various aspects, following with a preliminary description of the case study framework and the necessary theoretical tools. We subsequently outline the problem formulation as depicted in the reference paper, as we describe the algorithms utilized, step by step and how they are combined together. Finally the simulations conducted, which are contained in this repository, are shown in detail to demonstrate the effectiveness of the illustrated approach, both re-proposing the same environment used in the reference paper and exploiting different solutions designed by us. 
 
 *Contributors:* Edoardo Spinetti, Desiree Bellan, Francesco Vincelli, Alper Calisir
-
 
 
 # General Idea
