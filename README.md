@@ -35,41 +35,6 @@ You can read the technical report [here]().
 
 We have used the Test World made by Chao Yao [here](https://github.com/chaolmu/gazebo_models_worlds_collection).
 
-## TURTLEBOT Simulations
-
-* Clone the turtlebot3, turtlebot3_msg and turtlebot3_simulations packages inside ~/catkin_ws/src
-```
-cd ~/catkin_ws/src
-git clone https://github.com/ROBOTIS-GIT/turtlebot3.git -b -{melodic|noetic}-devel
-git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git -b -{melodic|noetic}-devel
-git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
-```
-* Modify the source file to use the BURGER model:
-
-Open the file from terminal
-```
-gedit ~/.bashrc
-```
-Copy paste the following instructions:
-```
-export TURTLEBOT3_MODEL=burger
-```
-* Clone this repository and build 
-```
-cd ~/catkin_ws/src
-git clone ...
-cd ..
-catkin_make
-```
-* Inside the directory ~/catkin_ws source the environment defined in the previous step
-```
-cd ~/catkin_ws
-source ~/.bashrc
-```
-* Run the following instructions on different terminals
-```
-roslaunch mix_initiative_turtlebot turtlebot3_hotel.launch
-```
 ### TIAGO Simulations
 ```
 # Run TIAGo docker container
