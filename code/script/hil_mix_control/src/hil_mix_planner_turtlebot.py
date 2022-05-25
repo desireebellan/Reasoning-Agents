@@ -115,7 +115,7 @@ def SendMix(MixPublisher, mix_control):
     MixPublisher.publish(MixMsg)
 
 
-def hil_planner(sys_model, robot_name='turtlebot', model_name = 'hotel'):
+def hil_planner(sys_model, initial_beta, robot_name='turtlebot', model_name = 'hotel'):
     global robot_pose, navi_control, tele_control, temp_task
     robot_full_model, hard_task, soft_task = sys_model
     robot_pose = [0, [0, 0, 0]]
@@ -147,7 +147,6 @@ def hil_planner(sys_model, robot_name='turtlebot', model_name = 'hotel'):
     # temporary task
     rospy.Subscriber('temp_task', task, TaskCallback)
     ####### robot information
-    initial_beta = 0
    
     planner = ltl_planner(robot_full_model, hard_task, soft_task, initial_beta)
     
@@ -199,22 +198,33 @@ def hil_planner(sys_model, robot_name='turtlebot', model_name = 'hotel'):
                 print ('new region reached', reach_ts)
                 robot_path.append(reach_ts)
                 
-                #-------------------------------
-                #update workspace
+                # correct errors when robot pose lies in between of two nodes            
                 if pre_reach_ts == None:
                     pre_reach_ts = reach_ts
-                if planner.check_edge(pre_reach_ts, reach_ts):               
+                prev_navi_control = navi_control
+                # stop the robot while the algorithm is running
+                SendMix(MixPublisher,[0.0,0.0])
+                # check if the visited edge belongs to the workspace
+                if planner.check_edge(pre_reach_ts, reach_ts):     
+                    print('edge already existing')          
                     reachable_prod_states = planner.update_reachable(reachable_prod_states, reach_ts)
                     posb_runs = planner.update_runs(posb_runs, reach_ts)
                 else:
+                    #update workspace
+                    print('edge not already existing')
                     print('update workspace')
                     planner.update_workspace(pre_reach_ts, reach_ts)
                     reachable_prod_states = planner.update_reachable(reachable_prod_states, reach_ts)
                     posb_runs = planner.update_runs(posb_runs, reach_ts)
-                    print(planner.product.edges)
-                    print(planner.product.graph['ts'].edges)
-                    print(planner.product.graph['ts'].graph['region'].edges)
-                                  
+                # restart the robot
+                # since the number of runs can be extremely long, and consiquently time consuming to compute, they are evaluated
+                # any time the region is updated
+                if len(posb_runs)>= 5000:
+                    posb_runs = set([planner.find_opt_paths_jit(posb_runs),])
+                    print(posb_runs)
+                SendMix(MixPublisher,list(prev_navi_control))
+                print(len(reachable_prod_states))   
+                print(len(posb_runs))               
                 pre_reach_ts = reach_ts
                 reach_new = True
             else:
@@ -240,6 +250,7 @@ def hil_planner(sys_model, robot_name='turtlebot', model_name = 'hotel'):
                 rospy.sleep(0.2)
             else:
                 print ('No Human inputs. Autonomous controller used.')
+                print('navi_control: %s' %(navi_control))
                 mix_control = list(navi_control)
                 SendMix(MixPublisher, mix_control)
             print ('robot_path:', robot_path)
@@ -247,20 +258,23 @@ def hil_planner(sys_model, robot_name='turtlebot', model_name = 'hotel'):
             #------------------------------
             # estimate human preference, i.e. beta
             # and update discrete plan
+            print('index %d' %(planner.index))
+            print('segment %s' %(planner.segment))
             if ((reach_new) and (planner.start_suffix())):
-                print ('robot_path:', robot_path)
                 print ('reachable_prod_states', reachable_prod_states)
+                prev_navi_control = navi_control
+                SendMix(MixPublisher,[0.0,0.0])
                 if hi_bool:
                     print ('------------------------------')
                     print ('---------- In IRL mode now ----------')
-                    if len(reachable_prod_states) != 0:
-                        est_beta_seq, match_score = planner.irl(robot_path, reachable_prod_states)
-                    else:
-                        est_beta_seq, match_score = planner.irl_jit(posb_runs)
+                    est_beta_seq, match_score = planner.irl_jit(posb_runs)
+
+                    #est_beta_seq, match_score = planner.irl(robot_path, reachable_prod_states)
                     hi_bool = False
                     A_beta.append(est_beta_seq)
                     print ('------------------------------')
-                print ('--- New suffix execution---')              
+                print ('--- New suffix execution---')     
+                SendMix(MixPublisher,list(prev_navi_control))         
                 robot_path = [reach_ts]
                 reachable_prod_states = planner.intersect_accept(reachable_prod_states, reach_ts)
                 posb_runs = set([(n,) for n in reachable_prod_states])
@@ -327,12 +341,18 @@ if __name__ == '__main__':
     parser = ArgumentParser(description='hil mix planner turtlebot')
     parser.add_argument('--model','-m', default = 'hotel', type = str,
                     help='Model : [hotel, hospital, office]')
+    parser.add_argument('--beta','-b', default = 0, type = float,
+                    help='Initial beta value')
+    parser.add_argument('--case','-c', default = 1, type = int,
+                        help = 'task case [1,2], 1 for delivery, 2 for surveillance.')
     args = parser.parse_args()
     model = args.model
-    print(model)
+    beta = args.beta
+    case = args.case
     
     if model == 'hotel':
         from init_hotel import sys_model
     elif model == 'hospital':
         from init_hospital import sys_model
-    hil_planner(sys_model, model_name = model)
+    sys_model = sys_model(case)
+    hil_planner(sys_model, beta, model_name = model)
