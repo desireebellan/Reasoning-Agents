@@ -44,7 +44,7 @@ class ProdAut(DiGraph):
                     if truth:
                         total_weight = cost + self.graph['beta']*dist
                         self.add_edge(f_prod_node, t_prod_node, weight = total_weight, cost = cost, distance = dist)
-        print('product updated')
+        print('product updated with %d states and %s transitions' %(len(self.nodes), len(self.edges)))
         
                                               
     def build_full_margin(self, opt_path):
@@ -54,12 +54,12 @@ class ProdAut(DiGraph):
                     for f_buchi_node in self.graph['buchi'].nodes():
                         f_prod_node = self.composition(f_ts_node, f_buchi_node)
                         #print 'f_prod_node' , (f_ts_node, f_buchi_node)
-                        for t_ts_node in self.graph['ts'].successors(f_ts_node):
-                            for t_buchi_node in self.graph['buchi'].successors(f_buchi_node):
+                        for t_ts_node in list(self.graph['ts'].successors(f_ts_node)):
+                            for t_buchi_node in list(self.graph['buchi'].successors(f_buchi_node)):
                                 t_prod_node = self.composition(t_ts_node, t_buchi_node)
                                 #print 't_prod_node' , (t_ts_node, t_buchi_node)
-                                label = self.graph['ts'].node[f_ts_node]['label']
-                                cost = self.graph['ts'][f_ts_node][t_ts_node]['weight']
+                                label = self.graph['ts'].nodes[f_ts_node]['label']
+                                cost = self.graph['ts'].edges[f_ts_node, t_ts_node]['weight']
                                 truth, dist = check_label_for_buchi_edge(self.graph['buchi'], label, f_buchi_node, t_buchi_node)
                                 total_weight = cost + self.graph['beta']*dist + 1
                                 #print 'label,truth,total_weight', label,truth,total_weight
@@ -200,12 +200,12 @@ class ProdAut_Run(object):
         self.pre_plan = []
         self.pre_plan.append(self.line[0][0]) 
         for ts_edge in self.pre_ts_edges:
-            if product.graph['ts'][ts_edge[0]][ts_edge[1]]['label'] == 'goto':
+            if product.graph['ts'].edges[ts_edge[0], ts_edge[1]]['label'] == 'goto':
                 self.pre_plan.append(ts_edge[1][0]) # motion 
             else:
                 self.pre_plan.append(ts_edge[1][1]) # action
         bridge = (self.line[-1],self.loop[0])
-        if product.graph['ts'][bridge[0]][bridge[1]]['label'] == 'goto':
+        if product.graph['ts'].edges[bridge[0], bridge[1]]['label'] == 'goto':
             self.pre_plan.append(bridge[1][0]) # motion 
         else:
             self.pre_plan.append(bridge[1][1]) # action 

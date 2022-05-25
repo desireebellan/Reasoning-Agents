@@ -2,7 +2,7 @@
 
 from ltl_tools.product import ProdAut_Run
 from collections import defaultdict
-from networkx import dijkstra_predecessor_and_distance, has_path, shortest_simple_paths, shortest_path, all_simple_paths
+from networkx import dijkstra_predecessor_and_distance, has_path, shortest_simple_paths, shortest_path, all_simple_paths, dijkstra_path
 
 import time 
 
@@ -41,10 +41,8 @@ def dijkstra_plan_networkX(product, beta=10):
                 line[target] = line_dist[target]+beta*loop[target][0]
         if line:
             opti_targ = min(line, key = line.get)
-            print('here3')
             print(len(line_pre))
             prefix = compute_path_from_pre(line_pre, opti_targ)
-            print('here4')
             precost = line_dist[opti_targ]
             runs[(prod_init, opti_targ)] = (prefix, precost, loop[opti_targ][1], loop[opti_targ][0])
     # best combination
@@ -63,7 +61,7 @@ def compute_path_ac_d(product, path):
         ac_d = 0
         for i in range(len(path)-1):
                 e = (path[i], path[i+1])
-                ac_d += product.edge[e[0]][e[1]]['distance']
+                ac_d += product.edges[e[0],e[1]]['distance']
         return ac_d
 
 
@@ -77,7 +75,8 @@ def opt_path_in_prefix(product, ts_path, reachable_states):
                 if init[0] == ts_path[0]:                        
                         for end_state in reachable_states:
                                 #for line_path in shortest_simple_paths(product, init, end_state, 'weight'):
-                                for line_path in all_simple_paths(product, init, end_state, cutoff=len(ts_path)):
+                                 #for line_path in all_simple_paths(product, init, end_state, cutoff=len(ts_path)):
+                                        line_path = dijkstra_path(product, init, end_state, weight='weight')
                                         if len(line_path) == len(ts_path):
                                                 if all(line_path[k][0] == ts_path[k] for k in range(0, len(ts_path))):
                                                         path_pool.append(line_path)
@@ -88,14 +87,17 @@ def opt_path_in_prefix(product, ts_path, reachable_states):
 def opt_path_in_suffix(product, ts_path, reachable_states):
         path_pool = []
         for acc in product.graph['accept']:
+                print('new acc')
                 if acc[0] == ts_path[0]:
                         for end_state in reachable_states:
-                                #for line_path in shortest_simple_paths(product, acc, end_state, 'weight'):
-                                for line_path in all_simple_paths(product, acc, end_state, cutoff=len(ts_path)):
-                                        if len(line_path) == len(ts_path):
-                                                if all(line_path[k][0] == ts_path[k] for k in range(0, len(ts_path))):
-                                                        path_pool.append(line_path)
-                                                        #break
+                                print('new end state')
+                                for line_path in shortest_simple_paths(product, acc, end_state, 'weight'):
+                                #for line_path in all_simple_paths(product, acc, end_state, cutoff=len(ts_path)):
+                                #line_path = dijkstra_path(product, acc, end_state, weight='weight')
+                                    if len(line_path) == len(ts_path) and all(line_path[k][0] == ts_path[k] for k in range(0, len(ts_path))):
+                                        print(' path pool updated')
+                                        path_pool.append(line_path)
+                                        break
         try:
             opt_line_path = min(path_pool, key=lambda p: compute_path_ac_d(product, p))
         except ValueError:
@@ -214,7 +216,7 @@ def dijkstra_loop(product, prod_accep):
         if tail:
             accep_pre = tail[-1]
             paths[accep_pre] = tail
-            costs[accep_pre] = cost + product.edge[accep_pre][prod_accep]['weight']
+            costs[accep_pre] = cost + product.edges[accep_pre, prod_accep]['weight']
     if costs:
         min_pre = min(costs.keys(), key=lambda p: costs[p])
         min_loop =  paths[min_pre]
@@ -339,7 +341,7 @@ def has_path_to_accept(product, f_s):
 def compute_path_cost(G, path):
         cost = 0.0
         for k in range(0,len(path)-1):
-                cost += G.edge[path[k]][path[k+1]]['weight']
+                cost += G.edges[path[k], path[k+1]]['weight']
         return cost
         
 def add_temp_task(product, run, index, segment, reg_s, reg_g, t_sg):
@@ -347,27 +349,30 @@ def add_temp_task(product, run, index, segment, reg_s, reg_g, t_sg):
                 new_pre = run.prefix[index:] + run.suffix
         elif segment == 'loop':
                 new_pre = run.suffix[index:] + run.suffix[0:index]
-        new_line = [product.node[node]['ts'] for node in new_pre]
+        new_line = [product.nodes[node]['ts'] for node in new_pre]
         K = len(new_line)
         ts = product.graph['ts']
         w = 10
         eval = 1000
-        extra_cost = 0.0
+        # TEST
+        print('new_pre: {}'.format(new_pre))
+        ##
         for s in range(K-2):
                 for g in range(s,K-1):
+                        extra_cost = 0.0
                         #---------- for r_s
                         opt_path_to_r_s = shortest_path(ts, new_line[s], reg_s, 'weight')                        
                         cost_to_r_s = compute_path_cost(ts, opt_path_to_r_s)
                         opt_path_r_s_back = shortest_path(ts, reg_s, new_line[s+1], 'weight')                        
                         cost_r_s_back = compute_path_cost(ts, opt_path_r_s_back)
-                        wo_r_s = ts.edge[new_line[s]][new_line[s+1]]['weight']
+                        wo_r_s = ts.edges[new_line[s], new_line[s+1]]['weight']
                         extra_cost += cost_to_r_s + cost_r_s_back - wo_r_s
                         #---------- for r_g
                         opt_path_to_r_g = shortest_path(ts, new_line[g], reg_g, 'weight')                        
                         cost_to_r_g = compute_path_cost(ts, opt_path_to_r_g)
                         opt_path_r_g_back = shortest_path(ts, reg_g, new_line[g+1], 'weight')                        
                         cost_r_g_back = compute_path_cost(ts, opt_path_r_g_back)
-                        wo_r_g = ts.edge[new_line[g]][new_line[g+1]]['weight']
+                        wo_r_g = ts.edges[new_line[g], new_line[g+1]]['weight']
                         extra_cost += cost_to_r_g + cost_r_g_back - wo_r_g
                         #-------- total time
                         total_time = compute_path_cost(ts, new_line[0:(g+1)]) + extra_cost 
@@ -375,11 +380,15 @@ def add_temp_task(product, run, index, segment, reg_s, reg_g, t_sg):
                                 delay_time = total_time - t_sg
                         else:
                                 delay_time = 0
+                        
                         new_eval = w*delay_time + extra_cost
                         if new_eval < eval:
                                 eval = new_eval
                                 new_s = s
                                 new_g = g
+        print('delay time : {}'.format(delay_time))
+        print('extra cost: {}'.format(extra_cost))
+        print('s {} new_s {} g {} new_g {}'.format(s, new_s, g, new_g))
         print ('Best index s and g found: (s, g) = (%d, %d)' %(new_s, new_g))
         g, s = new_g, new_s
         if (g - s == 1):

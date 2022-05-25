@@ -88,14 +88,11 @@ class MotionFts(DiGraph):
     def update_after_edges_change(self, sense_info):
         # sense_info = {'edge':(set(add_edges), set(del_edges))} 
         edge_info = sense_info['edge']
-        changed_edges = set()
         for e in edge_info[0]:
             self.add_edge(e[0][0], e[1][0], weight=distance(e[0][0], e[1][0]))
-            changed_edges.add(e[0][0])
         for e in edge_info[1]:
             self.remove_edge(e[0], e[1])
-            changed_edges.add(e[0])
-        return changed_edges
+        print('region graph updated: %d states and %s transitions' %(len(self.nodes), len(self.edges)))
             
 class ActionModel(object):
     # action_dict = {act_name: (cost, guard_formula, label)}
@@ -168,6 +165,7 @@ class MotActModel(DiGraph):
             reg = prod_node[0]
             reg_to = prod_node_to[0]
             self.add_edge(prod_node, prod_node_to, weight = self.graph['region'].edges[reg,reg_to]['weight'], label = 'goto', marker = 'visited')
+        print('mode updated with %d states and %s transitions' %(len(self.nodes), len(self.edges)))
     
     def fly_successors_iter(self, prod_node): 
         reg, act = self.projection(prod_node)

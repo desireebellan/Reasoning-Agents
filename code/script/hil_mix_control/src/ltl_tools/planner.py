@@ -117,8 +117,7 @@ class ltl_planner(object):
                 for f_s in reachable_states:
                         for t_s in self.product.successors(f_s):
                                 if t_s[0] == ts_node:
-                                        new_reachable.add(t_s)
-                        
+                                        new_reachable.add(t_s)     
                 return new_reachable
 
         def update_runs(self, prev_runs, ts_node):
@@ -161,6 +160,7 @@ class ltl_planner(object):
         
         def check_edge(self, pos1, pos2):
                 edge = (pos1, pos2)
+                print('checking edge...')
                 if edge in list(self.product.graph['ts'].edges):
                         return True
                 else:
@@ -204,8 +204,8 @@ class ltl_planner(object):
                 ac_d = 0
                 for i in range(len(path)-1):
                         e = (path[i], path[i+1])
-                        ac_d += self.product.edge[e[0]][e[1]]['distance']
-                        ac_c += self.product.edge[e[0]][e[1]]['cost']
+                        ac_d += self.product.edges[e[0], e[1]]['distance']
+                        ac_c += self.product.edges[e[0], e[1]]['cost']
                 return [ac_c, ac_d]
 
         def margin_opt_path(self, opt_path, beta):
