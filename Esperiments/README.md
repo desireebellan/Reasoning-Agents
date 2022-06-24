@@ -4,7 +4,8 @@ List of the experiments done
 1. Hotel Environment
    1. Case 1: Delivery Constraints
       - Without Human in the Loop
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30 ([time t0](ROS_Turtlebot/Hotel/Delivery/NO_HIL/t0_1.png), [time t](ROS_Turtlebot/Hotel/Delivery/NO_HIL/t_1.png), [control plot](ROS_Turtlebot/Hotel/Delivery/NO_HIL/control_1.png))
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30 and feasible soft constraint
+        - Starting beta = 30 and unfeasible soft constraint [time t0](ROS_Turtlebot/Hotel/Delivery/NO_HIL/t0_1.png), [time t](ROS_Turtlebot/Hotel/Delivery/NO_HIL/t_1.png), [control plot](ROS_Turtlebot/Hotel/Delivery/NO_HIL/control_1.png))
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0
       - With Human in the Loop 
         - Starting beta = 30, after IRL beta decrease (pass though c4)
