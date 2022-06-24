@@ -16,7 +16,7 @@ List of the experiments done
    2. Case 2: Surveillance Contraints
       - Without Human in the Loop
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30
-        - Starting beta = 0
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0
         - Incomplete workspace: missing edge 
         - Incomplete workspace: missing node
       - With Human in the Loop 
