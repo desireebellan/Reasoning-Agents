@@ -27,7 +27,7 @@ List of the experiments done
 2. Hospital Environment
    1. Case 1: Delivery Constraints
       - Without Human in the Loop
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0 
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0 ([time t0](ROS_Turtlebot/Hospital/Delivery/no_HIL/t0_1.png), [time_t](ROS_Turtlebot/Hospital/Delivery/no_HIL/t_1.png), [control plot](ROS_Turtlebot/Hospital/Delivery/no_HIL/control_1.png))
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30
       - With Human in the Loop
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30, after IRL beta decrease (pass though r6)
