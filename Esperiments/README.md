@@ -30,7 +30,7 @@ List of the experiments done
         - Starting beta = 0 ([time t0](ROS_Turtlebot/Hospital/Delivery/NO_HIL/t0_1.png), [time_t](ROS_Turtlebot/Hospital/Delivery/NO_HIL/t_1.png), [control plot](ROS_Turtlebot/Hospital/Delivery/NO_HIL/control_1.png))
         - Starting beta = 30 ([time t0](ROS_Turtlebot/Hospital/Delivery/NO_HIL/t0_2.png), [time_t](ROS_Turtlebot/Hospital/Delivery/NO_HIL/t_2.png), [control plot](ROS_Turtlebot/Hospital/Delivery/NO_HIL/control_2.png))
       - With Human in the Loop
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30, after IRL beta decrease (pass though r6)
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30, after IRL beta decrease (pass though r6) ([time t0](ROS_Turtlebot/Hospital/Delivery/HIL/t0_1.png), [time_t](ROS_Turtlebot/Hospital/Delivery/HIL/t_1.png), [control plot](ROS_Turtlebot/Hospital/Delivery/HIL/control_1.png) and [beta plot](ROS_Turtlebot/Hospital/Delivery/HIL/beta_1.png))
         - Temporal task: from r2 to r5 in 500 sec (feasible)
         - Temporal task: from r2 to r5 in 10 sec (feasible, delay)
         - Temporal task: from r5 to r3 in 500 sec (not feasible)
