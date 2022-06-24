@@ -1,0 +1,7 @@
+<launch>
+  <arg name="model" default="hotel" doc="Environment Model [hotel, hospital, office]"/>
+ 
+  <param name = "model" value = "$(arg model)"/> 
+
+  <node pkg="turtlebot3_files" type="temp_task.py" name="temp_task"  output="screen"></node>
+</launch>
