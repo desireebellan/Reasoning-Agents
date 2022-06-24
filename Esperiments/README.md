@@ -25,7 +25,9 @@ List of the experiments done
         - Temporal task: from r0 to r7 in 10 sec (feasible with delay)
         - Temporal task: from r0 to r4 in 50 sec (feasible, does not change beta)
 2. Hospital Environment
-   1. Case 1: Delivery Constraints
+   1. Case 1: Delivery Constraints ([buchi automata](ROS_Turtlebot/Hospital/Delivery/buchi_hard.gif))
+      hard constraints = ([]<> (r0 && <> (r2 && <> r4) && ([] !r3)))
+      soft constraints = ([] !r6)
       - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Without Human in the Loop 
         - Starting beta = 0 ([time t0](ROS_Turtlebot/Hospital/Delivery/NO_HIL/t0_1.png), [time_t](ROS_Turtlebot/Hospital/Delivery/NO_HIL/t_1.png), [control plot](ROS_Turtlebot/Hospital/Delivery/NO_HIL/control_1.png))
         - Starting beta = 30 ([time t0](ROS_Turtlebot/Hospital/Delivery/NO_HIL/t0_2.png), [time_t](ROS_Turtlebot/Hospital/Delivery/NO_HIL/t_2.png), [control plot](ROS_Turtlebot/Hospital/Delivery/NO_HIL/control_2.png))
@@ -35,7 +37,9 @@ List of the experiments done
         - Temporal task: from r2 to r5 in 10 sec (feasible, delay)
         - Temporal task: from r5 to r3 in 500 sec (not feasible)
         - Temporal task: from r5 to r6 in 500 sec (feasible, does not change beta)
-   2. Case 2: Surveillance Constraints 
+   2. Case 2: Surveillance Constraints ([buchi automata](ROS_Turtlebot/Hospital/Surveillance/buchi_hard.gif))
+      hard_task = (([] <> c2) && ([] <> c3 ) && ([] <> c4))
+      soft_task = ([] (c3 -> (!c4 U <> r2)))
       - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Without Human in the Loop 
         -  Starting beta = 30 ([time t0](ROS_Turtlebot/Hospital/Surveillance/NO_HIL/t0_1.png), [time t](ROS_Turtlebot/Hospital/Surveillance/NO_HIL/t_1.png), [control plot](ROS_Turtlebot/Hospital/Surveillance/NO_HIL/control_1.png)
         - Starting beta = 0 ([time t0](ROS_Turtlebot/Hospital/Surveillance/NO_HIL/t0_2.png), [time t](ROS_Turtlebot/Hospital/Surveillance/NO_HIL/t_2.png), [control plot](ROS_Turtlebot/Hospital/Surveillance/NO_HIL/control_2.png)
