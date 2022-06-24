@@ -88,13 +88,6 @@ rosservice call /pal_map_manager/save_map "directory: ''"
 
 sudo docker cp  $dockerid:/root/.pal/tiago_maps/. /home/alp/Desktop/maps/
 ```
-
-### Solved Issues
-* If turtlebot3_teleop does not work with gazebo, try to reinstall gazebo_ros_pkgs
-```
-sudo apt-get install ros-{melodic|noetic}-gazebo-ros-pkgs ros-{melodic|noetic}-gazebo-ros-control
-```
-
 ## References
 <a id="1">[1]</a> 
 Guo, M., Andersson, S. et al..
