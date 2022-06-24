@@ -1,6 +1,8 @@
 # TURTLEBOT3 SIMULATIONS
 Here you can find the instructions to succesfully run the experiments using Turtlebot3.
 
+## INSTALL ROS
+## DOWNLOAD PACKAGES
 * Clone the turtlebot3 and turtlebot3_msg packages inside ~/catkin_ws/src
 ```
 cd ~/catkin_ws/src
@@ -21,16 +23,21 @@ export TURTLEBOT3_MODEL=burger
 ```
 cd ~/catkin_ws/src
 wget "https://downgit.github.io/#/home?url=https://github.com/desireebellan/Reasoning-Agents/tree/main/code/script"
-wget ""
+wget "https://downgit.github.io/#/home?url=https://github.com/desireebellan/Reasoning-Agents/tree/main/code/turtlebot3_experiments"
 ```
-* Inside the directory ~/catkin_ws source the environment defined in the previous step
-```
-cd ~/catkin_ws
-source ~/.bashrc
-```
+
+## MODIFY PACKAGES
+## BUILD
+## RUN
 * Run the following instructions on different terminals
 ```
-roslaunch mix_initiative_turtlebot turtlebot3_hotel.launch
+roslaunch turtlebot3_files turtlebot3_{hospital|hotel}.launch
+roslaunch turtlebot3_files temp_task.launch model:="{hospital|hotel}"
+roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
+```
+* Run the following instruction on a different terminal (the parameters can be changed to execute different experiments)
+```
+rosrun hil_mix_control hil_mix_planner_turtlebot.py -b 30 -c 1 -m hotel
 ```
 
 ## INSTRUCTION
