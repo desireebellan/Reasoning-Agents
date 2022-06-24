@@ -47,3 +47,9 @@ rosrun hil_mix_control hil_mix_planner_turtlebot.py -b 30 -c 1 -m hotel
 * run roslaunch teleop
 * run rosrun
 ## SOLVED ISSUES
+### Solved Issues
+* If turtlebot3_teleop does not work with gazebo, try to reinstall gazebo_ros_pkgs
+```
+sudo apt-get install ros-{melodic|noetic}-gazebo-ros-pkgs ros-{melodic|noetic}-gazebo-ros-control
+```
+
