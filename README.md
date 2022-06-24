@@ -28,6 +28,8 @@ In order to evaluate the simulations done, we plotted the trajectories followed 
 - [ROS Noetic] on Ubuntu 20.04 for TURTLEBOT
 - [ROS Melodic] on Ubuntu 18.04 for TIAGO
 
+## Simulations
+
 ## Documentation
 You can read the technical report [here]().
 
