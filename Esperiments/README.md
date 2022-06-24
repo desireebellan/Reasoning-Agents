@@ -27,8 +27,8 @@ List of the experiments done
 2. Hospital Environment
    1. Case 1: Delivery Constraints
       - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Without Human in the Loop 
-        - Starting beta = 0 ([time t0](ROS_Turtlebot/Hospital/Delivery/noHIL/t0_1.png), [time_t](ROS_Turtlebot/Hospital/Delivery/noHIL/t_1.png), [control plot](ROS_Turtlebot/Hospital/Delivery/noHIL/control_1.png))
-        - Starting beta = 30 ([time t0](ROS_Turtlebot/Hospital/Delivery/noHIL/t0_2.png), [time_t](ROS_Turtlebot/Hospital/Delivery/noHIL/t_2.png), [control plot](ROS_Turtlebot/Hospital/Delivery/noHIL/control_2.png))
+        - Starting beta = 0 ([time t0](ROS_Turtlebot/Hospital/Delivery/NO_HIL/t0_1.png), [time_t](ROS_Turtlebot/Hospital/Delivery/NO_HIL/t_1.png), [control plot](ROS_Turtlebot/Hospital/Delivery/NO_HIL/control_1.png))
+        - Starting beta = 30 ([time t0](ROS_Turtlebot/Hospital/Delivery/NO_HIL/t0_2.png), [time_t](ROS_Turtlebot/Hospital/Delivery/NO_HIL/t_2.png), [control plot](ROS_Turtlebot/Hospital/Delivery/NO_HIL/control_2.png))
       - With Human in the Loop
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30, after IRL beta decrease (pass though r6)
         - Temporal task: from r2 to r5 in 500 sec (feasible)
