@@ -33,61 +33,6 @@ You can read the technical report [here]().
 
 We have used the Test World made by Chao Yao [here](https://github.com/chaolmu/gazebo_models_worlds_collection).
 
-### TIAGO Simulations
-```
-# Run TIAGo docker container
-rocker --home --user --x11 palroboticssl/tiago_tutorials:melodic --devices /dev/dri/card0
-
-# Go to src folder
-cd /tiago_public_ws/src/
-
-# Git clone mix_initiative repository 
-git clone https://github.com/MengGuo/mix_initiative.git
-
-# Re-build TIAGo workspace
-cd /tiago_public_ws
-catkin build
-catkin_make
-
-# source workspace
-source ./devel/setup.bash
-
-# Go to:
-cd /tiago_public_ws/src/mix_initiative/hil_mix_control/src/
-
-# Run:
-python hil_mix_planner_tiago.py
-```
-
-Use another terminal
-```
-sudo docker cp /home/alp/Desktop/test/. $dockerid:/tiago_public_ws/target/
-
-mv target/test_zone.world src/tiago_simulation/tiago_gazebo/worlds/
-
-mv target/test_zone/ src/tiago_simulation/tiago_gazebo/models/
-
-
-roslaunch tiago_gazebo tiago_gazebo.launch public_sim:=true robot:=steel world:=test_zone
-```
-
-Another terminal
-```
-sudo docker exec -it $dockerid bash
-
-# To operate robot with arrow keys
-rosrun key_teleop key_teleop.py
-
-roslaunch tiago_2dnav_gazebo tiago_mapping.launch public_sim:=true world:=test_zone
-```
-
-
-To save maps
-```
-rosservice call /pal_map_manager/save_map "directory: ''"
-
-sudo docker cp  $dockerid:/root/.pal/tiago_maps/. /home/alp/Desktop/maps/
-```
 ## References
 <a id="1">[1]</a> 
 Guo, M., Andersson, S. et al..
