@@ -26,20 +26,20 @@ List of the experiments done
         - Temporal task: from r0 to r4 in 50 sec (feasible, does not change beta)
 2. Hospital Environment
    1. Case 1: Delivery Constraints
-      - With Human in the Loop
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0 
-        - Starting beta = 30
       - Without Human in the Loop
-        - Starting beta = 30, after IRL beta decrease (pass though r6)
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0 
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30
+      - With Human in the Loop
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30, after IRL beta decrease (pass though r6)
         - Temporal task: from r2 to r5 in 500 sec (feasible)
         - Temporal task: from r2 to r5 in 10 sec (feasible, delay)
         - Temporal task: from r5 to r3 in 500 sec (not feasible)
         - Temporal task: from r5 to r6 in 500 sec (feasible, does not change beta)
    2. Case 2: Surveillance Constraints 
-      - With Human in the Loop
+      - Without Human in the Loop
         - Starting beta = 0
         - Starting beta = 30
-      - Without Human in the Loop
+      - With Human in the Loop
          - Unknown environment (node, doesn't affect plan)
          - Unknown environment (edge, doesn't affect plan)
          - Unknown environment (edge, does affect plan)
@@ -69,20 +69,20 @@ List of the experiments done
         - Temporal task: from r0 to r4 in 50 sec (feasible, does not change beta)
 2. Hospital Environment
    1. Case 1: Delivery Constraints
-      - With Human in the Loop
+      - Without Human in the Loop
         - Starting beta = 0
         - Starting beta = 30
-      - Without Human in the Loop
+      - With Human in the Loop
         - Starting beta = 30, after IRL beta decrease (pass though r6)
         - Temporal task: from r2 to r5 in 500 sec (feasible)
         - Temporal task: from r2 to r5 in 10 sec (feasible, delay)
         - Temporal task: from r5 to r3 in 500 sec (not feasible)
         - Temporal task: from r5 to r6 in 500 sec (feasible, does not change beta)
    2. Case 2: Surveillance Constraints 
-      - With Human in the Loop
+      - Without Human in the Loop
         - Starting beta = 0
         - Starting beta = 30
-      - Without Human in the Loop
+      - With Human in the Loop
          - Unknown environment (node, doesn't affect plan)
          - Unknown environment (edge, doesn't affect plan)
          - Unknown environment (edge, does affect plan)
