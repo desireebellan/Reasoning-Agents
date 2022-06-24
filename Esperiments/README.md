@@ -4,8 +4,8 @@ List of the experiments done
 1. Hotel Environment
    1. Case 1: Delivery Constraints
       - Without Human in the Loop
-        - Starting beta = 30
-        - Starting beta = 0
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0
       - With Human in the Loop 
         - Starting beta = 30, after IRL beta decrease (pass though c4)
         - Starting beta = 30, afterl IRL beta doesn't change (pass though r5)
@@ -15,7 +15,7 @@ List of the experiments done
         - Modify smooth mix parameters: ds = 5 m and epsilon = 2 m 
    2. Case 2: Surveillance Contraints
       - Without Human in the Loop
-        - Starting beta = 30
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30
         - Starting beta = 0
         - Incomplete workspace: missing edge 
         - Incomplete workspace: missing node
