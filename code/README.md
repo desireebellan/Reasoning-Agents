@@ -17,12 +17,11 @@ Copy paste the following instructions:
 ```
 export TURTLEBOT3_MODEL=burger
 ```
-* Clone folders script and turtlebot3_experiments inside catkin_ws
+* Download the folders script and turtlebot3_experiments inside catkin_ws
 ```
 cd ~/catkin_ws/src
-git clone ...
-cd ..
-catkin_make
+wget "https://downgit.github.io/#/home?url=https://github.com/desireebellan/Reasoning-Agents/tree/main/code/script"
+wget ""
 ```
 * Inside the directory ~/catkin_ws source the environment defined in the previous step
 ```
