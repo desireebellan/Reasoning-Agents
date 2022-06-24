@@ -27,9 +27,9 @@ List of the experiments done
 2. Hospital Environment
    1. Case 1: Delivery Constraints ([buchi automata](ROS_Turtlebot/Hospital/Delivery/buchi_hard.gif))
    
-      hard constraints = ([]<> (r0 && <> (r2 && <> r4) && ([] !r3)))
+      hard constraints = $\square\lozenge (r0 \wedge \lozenge (r2 \wedge \lozenge r4) \wedge (\square \lnot r3)) $ 
       
-      soft constraints = ([] !r6)
+      soft constraints = $\square\lnot r6$
       
       - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Without Human in the Loop 
         - Starting beta = 0 ([time t0](ROS_Turtlebot/Hospital/Delivery/NO_HIL/t0_1.png), [time_t](ROS_Turtlebot/Hospital/Delivery/NO_HIL/t_1.png), [control plot](ROS_Turtlebot/Hospital/Delivery/NO_HIL/control_1.png))
@@ -42,9 +42,9 @@ List of the experiments done
         - Temporal task: from r5 to r6 in 500 sec (feasible, does not change beta)
    2. Case 2: Surveillance Constraints ([buchi automata](ROS_Turtlebot/Hospital/Surveillance/buchi_hard.gif))
       
-      hard_task = (([] <> c2) && ([] <> c3 ) && ([] <> c4))
+      hard_task = $(\square\lozenge c2) \wedge (\square \lozenge c3) \wedge (\square\lozenge c4)$
       
-      soft_task = ([] (c3 -> (!c4 U <> r2)))
+      soft_task = $ \square (c3 \implies (\lnot c4 U \lozenge r2))$ 
       - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Without Human in the Loop 
         -  Starting beta = 30 ([time t0](ROS_Turtlebot/Hospital/Surveillance/NO_HIL/t0_1.png), [time t](ROS_Turtlebot/Hospital/Surveillance/NO_HIL/t_1.png), [control plot](ROS_Turtlebot/Hospital/Surveillance/NO_HIL/control_1.png)
         - Starting beta = 0 ([time t0](ROS_Turtlebot/Hospital/Surveillance/NO_HIL/t0_2.png), [time t](ROS_Turtlebot/Hospital/Surveillance/NO_HIL/t_2.png), [control plot](ROS_Turtlebot/Hospital/Surveillance/NO_HIL/control_2.png)
