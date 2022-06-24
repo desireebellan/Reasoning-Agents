@@ -27,7 +27,7 @@ List of the experiments done
 2. Hospital Environment
    1. Case 1: Delivery Constraints
       - With Human in the Loop
-        - Starting beta = 0
+        - ``` diff - Starting beta = 0 ```
         - Starting beta = 30
       - Without Human in the Loop
         - Starting beta = 30, after IRL beta decrease (pass though r6)
