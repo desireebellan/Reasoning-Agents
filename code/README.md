@@ -17,7 +17,7 @@ Copy paste the following instructions:
 ```
 export TURTLEBOT3_MODEL=burger
 ```
-* Clone this repository and build 
+* Clone folders script and turtlebot3_experiments inside catkin_ws
 ```
 cd ~/catkin_ws/src
 git clone ...
