@@ -20,7 +20,7 @@ List of the experiments done
         - Incomplete workspace: missing edge 
         - Incomplete workspace: missing node
       - With Human in the Loop 
-        - Starting beta = 0, after IRL beta increase (pass though r4) ([time t0](ROS Turtlebot/Hotel/Surveillance/HIL) and [time t]()
+        - Starting beta = 0, after IRL beta increase (pass though r4) ([time t0](ROS_Turtlebot/Hotel/Surveillance/HIL/t0_1.png) and [time t](ROS_Turtlebot/Hotel/Surveillance/HIL/t_1.png)
         - Temporal task: from r0 to r7 in 1000 sec (feasible)
         - Temporal task: from r0 to r7 in 10 sec (feasible with delay)
         - Temporal task: from r0 to r4 in 50 sec (feasible, does not change beta)
