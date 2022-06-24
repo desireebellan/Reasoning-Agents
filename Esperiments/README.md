@@ -55,7 +55,7 @@ List of the experiments done
          - Unknown environment (edge, doesn't affect plan)
          - Unknown environment (edge, does affect plan)
 # 2D Grid 
-1. Hotel Environment ([grid search](2D_Grid))
+1. Hotel Environment ([grid search](2D%20Grid/map.gif))
    1. Case 1: Delivery Constraints
       - Without Human in the Loop
         - Starting beta = 30
