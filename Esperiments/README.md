@@ -70,7 +70,7 @@ List of the experiments done
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Move the robot to position that defies the hard constraints (r5) : the smooth mix control doesn't allow it, and also the IRL algorithm doesn't change the beta value ([motion animation](2D%20Grid/Hotel/Delivery/HIL/robot_2.gif) and [graph animation](2D%20Grid/Hotel/Delivery/HIL/control_2.gif))
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r0 to r7 in 1000 sec (feasible)(delay=0s, extra cost: 241.88) ([motion animation](2D%20Grid/Hotel/Delivery/HIL/robot_3.gif) and [graph animation](2D%20Grid/Hotel/Delivery/HIL/control_3.gif))
         - Temporal task: from r0 to r7 in 10 sec (feasible with delay) (delay=76.87s, extra cost= 241.88) ([motion animation](2D%20Grid/Hotel/Delivery/HIL/robot_4.gif) and [graph animation](2D%20Grid/Hotel/Delivery/HIL/control_4.gif))
-        - Temporal task: from r8 to r5 in 50 sec (not feasible)
+        - Temporal task: from r8 to r5 in 50 sec (not feasible) (uses an algorithm similar to the one implied in the smooth mix computation to evaluate if the task is feasible or not according to the hard constraints) ([motion animation](2D%20Grid/Hotel/Delivery/HIL/robot_5.gif) and [graph animation](2D%20Grid/Hotel/Delivery/HIL/control_5.gif))
         - Modify smooth mix parameters: ds = 5 m and epsilon = 2 m 
    2. Case 2: Surveillance Contraints
       - Without Human in the Loop
