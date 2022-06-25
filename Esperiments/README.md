@@ -14,11 +14,11 @@ List of the experiments done
         - Temporal task: from r0 to r7 in 10 sec (feasible with delay)
         - Temporal task: from r8 to r5 in 50 sec (not feasible)
         - Modify smooth mix parameters: ds = 5 m and epsilon = 2 m 
-   2. Case 2: Surveillance Contraints ([buchi automata](ROS_Turtlebot/Hotel/Surveillance/buchi_hard.gif))
+   2. Case 2: Surveillance Contraints ([buchi automata hard constraints](ROS_Turtlebot/Hotel/Surveillance/buchi_hard.gif) and [soft constraints](ROS_Turtlebot/Hotel/Surveillance/buchi_soft.gif))
       
-      hard_task = $ (\square\lozange r2) \wedge (\square\lozange r3) \wedge (\square\lozange r8)$ 
+      hard_task = $ (\square\lozenge r2) \wedge (\square\lozenge r3) \wedge (\square\lozenge r8)$ 
       
-      soft_task = $\square\lozange(r4 \implies (\lnot r5 U r6))$
+      soft_task = $\square(c3 \implies (\lozenge r6))$
       
       - Without Human in the Loop
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30
