@@ -80,9 +80,9 @@ List of the experiments done
         - Temporal task: from r0 to r4 in 50 sec (feasible, does not change beta)
 2. Hospital Environment ([grid search](2D%20Grid/Hospital/map.gif))
    1. Case 1: Delivery Constraints
-      - Without Human in the Loop
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0 ([motion animation](2D%20Grid/Hospital/Delivery/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Delivery/NO_HIL/control_1.gif))
-        - Starting beta = 30
+      - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Without Human in the Loop
+        - Starting beta = 0 ([motion animation](2D%20Grid/Hospital/Delivery/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Delivery/NO_HIL/control_1.gif))
+        - Starting beta = 30 ([motion animation](2D%20Grid/Hospital/Delivery/NO_HIL/robot_2.gif) and [graph animation](2D%20Grid/Hospital/Delivery/NO_HIL/control_2.gif))
       - With Human in the Loop
         - Starting beta = 30, after IRL beta decrease (pass though r6)
         - Temporal task: from r2 to r5 in 500 sec (feasible)
