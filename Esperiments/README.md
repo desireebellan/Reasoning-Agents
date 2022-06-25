@@ -70,7 +70,7 @@ List of the experiments done
    2. Case 2: Surveillance Contraints
       - Without Human in the Loop
         - Starting beta = 30
-        - Starting beta = 0
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0 ([motion animation](2D%20Grid/Hotel/Surveillance/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hotel/Surveillance/NO_HIL/control_1.gif))
         - Incomplete workspace: missing edge 
         - Incomplete workspace: missing node
       - With Human in the Loop 
