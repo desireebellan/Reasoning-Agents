@@ -95,9 +95,9 @@ List of the experiments done
         - Temporal task: from r5 to r3 in 500 sec (not feasible)
         - Temporal task: from r5 to r6 in 500 sec (feasible, does not change beta)
    2. Case 2: Surveillance Constraints 
-      - Without Human in the Loop
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0 ([motion animation](2D%20Grid/Hospital/Surveillance/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Surveillance/NO_HIL/control_1.gif))
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30 (\*) ([motion animation](2D%20Grid/Hospital/Surveillance/NO_HIL/robot_3.gif) and [graph animation](2D%20Grid/Hospital/Surveillance/NO_HIL/control_3.gif))
+      - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Without Human in the Loop
+        -  Starting beta = 0 ([motion animation](2D%20Grid/Hospital/Surveillance/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Surveillance/NO_HIL/control_1.gif))
+        - Starting beta = 30 (\*) ([motion animation](2D%20Grid/Hospital/Surveillance/NO_HIL/robot_3.gif) and [graph animation](2D%20Grid/Hospital/Surveillance/NO_HIL/control_3.gif))
       - With Human in the Loop
          - Unknown environment (node, doesn't affect plan)
          - Unknown environment (edge, doesn't affect plan)
