@@ -81,7 +81,7 @@ List of the experiments done
 2. Hospital Environment ([grid search](2D%20Grid/Hospital/map.gif))
    1. Case 1: Delivery Constraints
       - Without Human in the Loop
-        - Starting beta = 0 ([motion animation](2D%20Grid/Hospital/Delivery/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Delivery/NO_HIL/control_1.gif))
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0 ([motion animation](2D%20Grid/Hospital/Delivery/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Delivery/NO_HIL/control_1.gif))
         - Starting beta = 30
       - With Human in the Loop
         - Starting beta = 30, after IRL beta decrease (pass though r6)
