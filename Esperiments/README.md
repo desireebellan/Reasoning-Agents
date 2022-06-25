@@ -66,9 +66,9 @@ List of the experiments done
         - Starting beta = 310: the constraint affect significantly the run cost so beta needs to be really high ([motion animation](2D%20Grid/Hotel/Delivery/NO_HIL/robot_2.gif) and [graph animation](2D%20Grid/Hotel/Delivery/NO_HIL/control_2.gif))
         -  Starting beta = 0 ([motion animation](2D%20Grid/Hotel/Delivery/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hotel/Delivery/NO_HIL/control_1.gif))
       - With Human in the Loop 
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 130, after IRL beta decrease (pass though c4) (it needs 2 different run to learn the correct value of beta) ([motion animation](2D%20Grid/Hotel/Delivery/HIL/robot_1.gif) and [graph animation](2D%20Grid/Hotel/Delivery/NO_HIL/control_1.gif))
-        - Move the robot to position that defies the hard constraints (r5) : the smooth mix control doesn't allow it, and also the IRL algorithm doesn't change the beta value ([motion animation](2D%20Grid/Hotel/Delivery/HIL/robot_2.gif) and [graph animation](2D%20Grid/Hotel/Delivery/NO_HIL/control_2.gif))
-        - Temporal task: from r0 to r7 in 1000 sec (feasible)
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 130, after IRL beta decrease (pass though c4) (it needs 2 different run to learn the correct value of beta) ([motion animation](2D%20Grid/Hotel/Delivery/HIL/robot_1.gif) and [graph animation](2D%20Grid/Hotel/Delivery/HIL/control_1.gif))
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Move the robot to position that defies the hard constraints (r5) : the smooth mix control doesn't allow it, and also the IRL algorithm doesn't change the beta value ([motion animation](2D%20Grid/Hotel/Delivery/HIL/robot_2.gif) and [graph animation](2D%20Grid/Hotel/Delivery/HIL/control_2.gif))
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r0 to r7 in 1000 sec (feasible)(delay=0, extra cost: 241.88) ([motion animation](2D%20Grid/Hotel/Delivery/HIL/robot_3.gif) and [graph animation](2D%20Grid/Hotel/Delivery/HIL/control_3.gif))
         - Temporal task: from r0 to r7 in 10 sec (feasible with delay)
         - Temporal task: from r8 to r5 in 50 sec (not feasible)
         - Modify smooth mix parameters: ds = 5 m and epsilon = 2 m 
