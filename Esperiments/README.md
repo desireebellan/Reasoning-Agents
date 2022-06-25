@@ -62,9 +62,9 @@ List of the experiments done
 # 2D Grid 
 1. Hotel Environment ([grid search](2D%20Grid/Hotel/map.gif))
    1. Case 1: Delivery Constraints
-      - Without Human in the Loop
-        - Starting beta = 30
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0 ([motion animation](2D%20Grid/Hotel/Delivery/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hotel/Delivery/NO_HIL/control_1.gif))
+      - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Without Human in the Loop
+        - Starting beta = 310 (the constraint affect significantly the run cost so beta needs to be really high) ([motion animation](2D%20Grid/Hotel/Delivery/NO_HIL/robot_2.gif) and [graph animation](2D%20Grid/Hotel/Delivery/NO_HIL/control_2.gif))
+        -  Starting beta = 0 ([motion animation](2D%20Grid/Hotel/Delivery/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hotel/Delivery/NO_HIL/control_1.gif))
       - With Human in the Loop 
         - Starting beta = 30, after IRL beta decrease (pass though c4)
         - Starting beta = 30, afterl IRL beta doesn't change (pass though r5)
