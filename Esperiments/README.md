@@ -59,7 +59,7 @@ List of the experiments done
    1. Case 1: Delivery Constraints
       - Without Human in the Loop
         - Starting beta = 30
-        - Starting beta = 0 ([motion animation](2D%20Grid/Hotel/Delivery/NO_HIL/map_2.gif) and [graph animation](2D%20Grid/Hotel/Delivery/NO_HIL/control_2.gif))
+        - Starting beta = 0 ([motion animation](2D%20Grid/Hotel/Delivery/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hotel/Delivery/NO_HIL/control_1.gif))
       - With Human in the Loop 
         - Starting beta = 30, after IRL beta decrease (pass though c4)
         - Starting beta = 30, afterl IRL beta doesn't change (pass though r5)
