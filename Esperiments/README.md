@@ -97,9 +97,10 @@ List of the experiments done
    2. Case 2: Surveillance Constraints 
       - Without Human in the Loop
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0 ([motion animation](2D%20Grid/Hospital/Surveillance/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Surveillance/NO_HIL/control_1.gif))
-        - Starting beta = 30
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30 (\*) ([motion animation](2D%20Grid/Hospital/Surveillance/NO_HIL/robot_3.gif) and [graph animation](2D%20Grid/Hospital/Surveillance/NO_HIL/control_3.gif))
       - With Human in the Loop
          - Unknown environment (node, doesn't affect plan)
          - Unknown environment (edge, doesn't affect plan)
          - Unknown environment (edge, does affect plan)
 
+(*) hard constraints = $\square\lozenge c2 \wedge \square\lozenge c3 \wedge \square\lozenge c4 $ soft constraints = $\square\lozenge r2$
