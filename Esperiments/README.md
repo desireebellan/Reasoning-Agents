@@ -69,7 +69,7 @@ List of the experiments done
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 130, after IRL beta decrease (pass though c4) (it needs 2 different run to learn the correct value of beta) ([motion animation](2D%20Grid/Hotel/Delivery/HIL/robot_1.gif) and [graph animation](2D%20Grid/Hotel/Delivery/HIL/control_1.gif))
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Move the robot to position that defies the hard constraints (r5) : the smooth mix control doesn't allow it, and also the IRL algorithm doesn't change the beta value ([motion animation](2D%20Grid/Hotel/Delivery/HIL/robot_2.gif) and [graph animation](2D%20Grid/Hotel/Delivery/HIL/control_2.gif))
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r0 to r7 in 1000 sec (feasible)(delay=0, extra cost: 241.88) ([motion animation](2D%20Grid/Hotel/Delivery/HIL/robot_3.gif) and [graph animation](2D%20Grid/Hotel/Delivery/HIL/control_3.gif))
-        - Temporal task: from r0 to r7 in 10 sec (feasible with delay)
+        - Temporal task: from r0 to r7 in 10 sec (feasible with delay) (delay=983.1211853566003, extra cost= 241.88) ([motion animation](2D%20Grid/Hotel/Delivery/HIL/robot_4.gif) and [graph animation](2D%20Grid/Hotel/Delivery/HIL/control_4.gif))
         - Temporal task: from r8 to r5 in 50 sec (not feasible)
         - Modify smooth mix parameters: ds = 5 m and epsilon = 2 m 
    2. Case 2: Surveillance Contraints
