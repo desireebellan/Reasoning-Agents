@@ -89,7 +89,7 @@ List of the experiments done
         - Starting beta = 0 ([motion animation](2D%20Grid/Hospital/Delivery/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Delivery/NO_HIL/control_1.gif))
         - Starting beta = 30 ([motion animation](2D%20Grid/Hospital/Delivery/NO_HIL/robot_2.gif) and [graph animation](2D%20Grid/Hospital/Delivery/NO_HIL/control_2.gif))
       - With Human in the Loop
-        - Starting beta = 30, after IRL beta decrease (pass though r6)
+        - Starting beta = 310, after IRL beta decrease (pass though r6)
         - Temporal task: from r2 to r5 in 500 sec (feasible)
         - Temporal task: from r2 to r5 in 10 sec (feasible, delay)
         - Temporal task: from r5 to r3 in 500 sec (not feasible)
