@@ -80,8 +80,8 @@ List of the experiments done
         - Incomplete workspace: missing node
       - With Human in the Loop 
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 200, after IRL beta increase (pass though r4) ([motion animation](2D%20Grid/Hotel/Surveillance/HIL/robot_1.gif) and [graph animation](2D%20Grid/Hotel/Surveillance/HIL/control_1.gif))
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r2 to 5 in 1000 sec (feasible) ([motion animation](2D%20Grid/Hotel/Surveillance/HIL/robot_2.gif) and [graph animation](2D%20Grid/Hotel/Surveillance/HIL/control_2.gif))
-        - Temporal task: from r0 to r7 in 10 sec (feasible with delay)
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r2 to 5 in 1000 sec (feasible) (delay = 0s, extra cost = 539.42) ([motion animation](2D%20Grid/Hotel/Surveillance/HIL/robot_2.gif) and [graph animation](2D%20Grid/Hotel/Surveillance/HIL/control_2.gif))
+        - Temporal task: from r2 to r5 in 5 sec (feasible with delay)
         - Temporal task: from r0 to r4 in 50 sec (feasible, does not change beta)
 2. Hospital Environment ([grid search](2D%20Grid/Hospital/map.gif))
    1. Case 1: Delivery Constraints
