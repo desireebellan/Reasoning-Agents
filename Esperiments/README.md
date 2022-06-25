@@ -59,7 +59,7 @@ List of the experiments done
    1. Case 1: Delivery Constraints
       - Without Human in the Loop
         - Starting beta = 30
-        - Starting beta = 0
+        - Starting beta = 0 ([motion animation](2D%20Grid/Hotel/Delivery/NO_HIL/map_2.gif) and [graph animation](2D%20Grid/Hotel/Delivery/NO_HIL/control_2.gif))
       - With Human in the Loop 
         - Starting beta = 30, after IRL beta decrease (pass though c4)
         - Starting beta = 30, afterl IRL beta doesn't change (pass though r5)
@@ -91,7 +91,7 @@ List of the experiments done
         - Temporal task: from r5 to r6 in 500 sec (feasible, does not change beta)
    2. Case 2: Surveillance Constraints 
       - Without Human in the Loop
-        - Starting beta = 0
+        - Starting beta = 0 
         - Starting beta = 30
       - With Human in the Loop
          - Unknown environment (node, doesn't affect plan)
