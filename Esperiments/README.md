@@ -74,12 +74,12 @@ List of the experiments done
         - Modify smooth mix parameters: ds = 5 m and epsilon = 2 m 
    2. Case 2: Surveillance Contraints
       - Without Human in the Loop
-        - Starting beta = 205 ([motion animation](2D%20Grid/Hotel/Surveillance/NO_HIL/robot_2.gif) and [graph animation](2D%20Grid/Hotel/Surveillance/NO_HIL/control_2.gif))
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 205 ([motion animation](2D%20Grid/Hotel/Surveillance/NO_HIL/robot_2.gif) and [graph animation](2D%20Grid/Hotel/Surveillance/NO_HIL/control_2.gif))
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0 ([motion animation](2D%20Grid/Hotel/Surveillance/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hotel/Surveillance/NO_HIL/control_1.gif))
         - Incomplete workspace: missing edge 
         - Incomplete workspace: missing node
       - With Human in the Loop 
-        - Starting beta = 0, after IRL beta increase (pass though r4)
+        - Starting beta = 200, after IRL beta increase (pass though r4)
         - Temporal task: from r0 to r7 in 1000 sec (feasible)
         - Temporal task: from r0 to r7 in 10 sec (feasible with delay)
         - Temporal task: from r0 to r4 in 50 sec (feasible, does not change beta)
