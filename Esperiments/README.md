@@ -59,8 +59,8 @@ List of the experiments done
          - Unknown environment (node, doesn't affect plan)
          - Unknown environment (edge, doesn't affect plan)
          - Unknown environment (edge, does affect plan)
-# 2D Grid 
-1.![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png)  Hotel Environment ([grid search](2D%20Grid/Hotel/map.gif))
+# 2D Grid (done)
+1.Hotel Environment ([grid search](2D%20Grid/Hotel/map.gif))
    1. Case 1: Delivery Constraints
       - Without Human in the Loop
         - Starting beta = 310: the constraint affect significantly the run cost so beta needs to be really high ([motion animation](2D%20Grid/Hotel/Delivery/NO_HIL/robot_2.gif) and [graph animation](2D%20Grid/Hotel/Delivery/NO_HIL/control_2.gif))
@@ -85,18 +85,18 @@ List of the experiments done
         - Temporal task: from r2 to r4 in 50 sec (feasible, does not change beta) (delay = 0s, extra cost = 200) ([motion animation](2D%20Grid/Hotel/Surveillance/HIL/robot_4.gif) and [graph animation](2D%20Grid/Hotel/Surveillance/HIL/control_4.gif))
 2. Hospital Environment ([grid search](2D%20Grid/Hospital/map.gif))
    1. Case 1: Delivery Constraints
-      - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Without Human in the Loop
+      - Without Human in the Loop
         - Starting beta = 0 ([motion animation](2D%20Grid/Hospital/Delivery/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Delivery/NO_HIL/control_1.gif))
         - Starting beta = 30 ([motion animation](2D%20Grid/Hospital/Delivery/NO_HIL/robot_2.gif) and [graph animation](2D%20Grid/Hospital/Delivery/NO_HIL/control_2.gif))
       - With Human in the Loop
-        - Unknown environment (node, doesn't affect plan)
-        - Unknown environment (edge, doesn't affect plan) (A door is been opened in between r5 and r4)
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Unknown environment (edge, does affect plan) : A door is been opened in between r5 and r4 ([new map](2D%20Grid/Hospital/Delivery/HIL/map_5.gif)) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_5.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_5.gif))
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 310, after IRL beta decrease (pass though r6) (doesn't change the plan since the region r6 is not involved in the hard constraint requests) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_4.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_4.gif))
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r2 to r5 in 500 sec (feasible) (delay = 0s, extra cost = 100) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_1.gif))
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r2 to r5 in 10 sec (feasible, delay) (delay = 32s, extra cost = 100) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_2.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_2.gif))
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r5 to r3 in 500 sec (not feasible) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_3.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_3.gif))
-   2. ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Case 2: Surveillance Constraints 
+        - *Unknown environment (node, doesn't affect plan)*
+        - *Unknown environment (edge, doesn't affect plan) (A door is been opened in between r5 and r4)*
+        - Unknown environment (edge, does affect plan) : A door is been opened in between r5 and r4 ([new map](2D%20Grid/Hospital/Delivery/HIL/map_5.gif)) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_5.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_5.gif))
+        - Starting beta = 310, after IRL beta decrease (pass though r6) (doesn't change the plan since the region r6 is not involved in the hard constraint requests) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_4.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_4.gif))
+        - Temporal task: from r2 to r5 in 500 sec (feasible) (delay = 0s, extra cost = 100) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_1.gif))
+        - Temporal task: from r2 to r5 in 10 sec (feasible, delay) (delay = 32s, extra cost = 100) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_2.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_2.gif))
+        - Temporal task: from r5 to r3 in 500 sec (not feasible) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_3.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_3.gif))
+   2. Case 2: Surveillance Constraints 
       -  Without Human in the Loop
          - Starting beta = 0 ([motion animation](2D%20Grid/Hospital/Surveillance/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Surveillance/NO_HIL/control_1.gif))
          - Starting beta = 110 (\*) ([motion animation](2D%20Grid/Hospital/Surveillance/NO_HIL/robot_3.gif) and [graph animation](2D%20Grid/Hospital/Surveillance/NO_HIL/control_3.gif))
