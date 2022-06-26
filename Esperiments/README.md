@@ -1,8 +1,8 @@
 # EXPERIMENTS
 List of the experiments done 
 # Ros Turtlebot
-1. Hotel Environment
-   1. ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Case 1: Delivery Constraints
+1. ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Hotel Environment
+   1. Case 1: Delivery Constraints
       - Without Human in the Loop
         - Starting beta = 30 and feasible soft constraint ([time t0](ROS_Turtlebot/Hotel/Delivery/NO_HIL/t0_3.png),[control plot](ROS_Turtlebot/Hotel/Delivery/NO_HIL/control_3.png))
         - *Starting beta = 30 and unfeasible soft constraint ([time t0](ROS_Turtlebot/Hotel/Delivery/NO_HIL/t0_1.png), [time t](ROS_Turtlebot/Hotel/Delivery/NO_HIL/t_1.png), [control plot](ROS_Turtlebot/Hotel/Delivery/NO_HIL/control_1.png))*
@@ -17,13 +17,13 @@ List of the experiments done
       
       soft_task = $\square(c3 \implies (\lozenge r6))$
       
-      - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Without Human in the Loop
+      - Without Human in the Loop
         -  Starting beta = 30
         -  Starting beta = 0
         - *Incomplete workspace: missing node*
       - With Human in the Loop 
-        - Starting beta = 0, after IRL beta increase (pass though r4) ([time t0](ROS_Turtlebot/Hotel/Surveillance/HIL/t0_1.png), [time t](ROS_Turtlebot/Hotel/Surveillance/HIL/t_1.png), [beta plot]() and [control plot]())
-        -  Temporal task: from r0 to r7 in 1000 sec (feasible) 
+        - Starting beta = 15, after IRL beta increase (pass though r4) ([time t0](ROS_Turtlebot/Hotel/Surveillance/HIL/t0_1.png), [time t](ROS_Turtlebot/Hotel/Surveillance/HIL/t_1.png), [beta plot](ROS_Turtlebot/Hotel/Surveillance/HIL/beta_1.png) and [control plot](ROS_Turtlebot/Hotel/Surveillance/HIL/control_1.png))
+        -  *Temporal task: from r0 to r7 in 1000 sec (feasible)*
         
 2. Hospital Environment
    1. Case 1: Delivery Constraints ([buchi automata](ROS_Turtlebot/Hospital/Delivery/buchi_hard.gif))
