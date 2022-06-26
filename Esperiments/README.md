@@ -72,13 +72,13 @@ List of the experiments done
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r0 to r7 in 10 sec (feasible with delay) (delay=76.87s, extra cost= 241.88) ([motion animation](2D%20Grid/Hotel/Delivery/HIL/robot_4.gif) and [graph animation](2D%20Grid/Hotel/Delivery/HIL/control_4.gif))
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r8 to r5 in 50 sec (not feasible) (uses an algorithm similar to the one implied in the smooth mix computation to evaluate if the task is feasible or not according to the hard constraints) ([motion animation](2D%20Grid/Hotel/Delivery/HIL/robot_5.gif) and [graph animation](2D%20Grid/Hotel/Delivery/HIL/control_5.gif))
         - Modify smooth mix parameters: ds = 5 m and epsilon = 2 m 
-   2. Case 2: Surveillance Contraints
-      - Without Human in the Loop
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 205 ([motion animation](2D%20Grid/Hotel/Surveillance/NO_HIL/robot_2.gif) and [graph animation](2D%20Grid/Hotel/Surveillance/NO_HIL/control_2.gif))
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0 ([motion animation](2D%20Grid/Hotel/Surveillance/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hotel/Surveillance/NO_HIL/control_1.gif))
-        - Incomplete workspace: missing edge 
-        - Incomplete workspace: missing node
-      - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) With Human in the Loop 
+   2. ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Case 2: Surveillance Contraints
+      -  Without Human in the Loop
+         -  Starting beta = 205 ([motion animation](2D%20Grid/Hotel/Surveillance/NO_HIL/robot_2.gif) and [graph animation](2D%20Grid/Hotel/Surveillance/NO_HIL/control_2.gif))
+         - Starting beta = 0 ([motion animation](2D%20Grid/Hotel/Surveillance/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hotel/Surveillance/NO_HIL/control_1.gif))
+         - *Incomplete workspace: missing edge*
+         - *Incomplete workspace: missing node*
+      - With Human in the Loop 
         -  Starting beta = 200, after IRL beta increase (pass though r4) ([motion animation](2D%20Grid/Hotel/Surveillance/HIL/robot_1.gif) and [graph animation](2D%20Grid/Hotel/Surveillance/HIL/control_1.gif))
         - Temporal task: from r2 to 5 in 1000 sec (feasible) (delay = 0s, extra cost = 539.42) ([motion animation](2D%20Grid/Hotel/Surveillance/HIL/robot_2.gif) and [graph animation](2D%20Grid/Hotel/Surveillance/HIL/control_2.gif))
         - Temporal task: from r7 to r5 in 10 sec (feasible with delay) (delay = 59.60s, extra cost = 574.73) ([motion animation](2D%20Grid/Hotel/Surveillance/HIL/robot_3.gif) and [graph animation](2D%20Grid/Hotel/Surveillance/HIL/control_3.gif))
