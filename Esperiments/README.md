@@ -105,4 +105,5 @@ List of the experiments done
          
 
 (\*) hard constraints = $\square\lozenge c2 \wedge \square\lozenge c3 \wedge \square\lozenge c4 $ soft constraints = $\square\lozenge r2$
-(\*\*) hard constraints = $\square\lozenge (r0 \wedge \lozenge (r5 \wedge \lozenge r4) \wedge (\square \lnot r3)) $ soft constraints = $\square\lnot r6$
+
+(\*\*) hard constraints = $\square\lozenge (r0 \wedge \lozenge (r5 \wedge \lozenge r4)) \wedge (\square \lnot r3) $ soft constraints = $\square\lnot r6$
