@@ -94,7 +94,7 @@ List of the experiments done
         - Unknown environment (edge, does affect plan)
         - Starting beta = 310, after IRL beta decrease (pass though r6)
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r2 to r5 in 500 sec (feasible) (delay = 0s, extra cost = 100) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_1.gif))
-        - Temporal task: from r2 to r5 in 10 sec (feasible, delay)
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r2 to r5 in 10 sec (feasible, delay) (delay = 32s, extra cost = 100) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_2.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_2.gif))
         - Temporal task: from r5 to r3 in 500 sec (not feasible)
         - Temporal task: from r5 to r6 in 500 sec (feasible, does not change beta)
    2. ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Case 2: Surveillance Constraints 
