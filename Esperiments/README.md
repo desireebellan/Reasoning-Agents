@@ -90,8 +90,8 @@ List of the experiments done
         - Starting beta = 30 ([motion animation](2D%20Grid/Hospital/Delivery/NO_HIL/robot_2.gif) and [graph animation](2D%20Grid/Hospital/Delivery/NO_HIL/control_2.gif))
       - With Human in the Loop
         - Unknown environment (node, doesn't affect plan)
-        - Unknown environment (edge, doesn't affect plan)
-        - Unknown environment (edge, does affect plan)
+        - Unknown environment (edge, doesn't affect plan) (A door is been opened in between r5 and r4)
+        - Unknown environment (edge, does affect plan) (A door is been opened in between r5 and r4 and the hard constraint is been slightly modified (\*\*))
         - Starting beta = 310, after IRL beta decrease (pass though r6) (doesn't change the plan since the region r6 is not involved in the hard constraint requests) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_4.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_4.gif))
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r2 to r5 in 500 sec (feasible) (delay = 0s, extra cost = 100) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_1.gif))
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r2 to r5 in 10 sec (feasible, delay) (delay = 32s, extra cost = 100) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_2.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_2.gif))
@@ -104,4 +104,5 @@ List of the experiments done
         - Starting beta = 0, after IRL beta increase to 13 (pass though r2) (it needs 2 run to learn the human behaviour) ([motion animation](2D%20Grid/Hospital/Surveillance/HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Surveillance/HIL/control_1.gif))
          
 
-(*) hard constraints = $\square\lozenge c2 \wedge \square\lozenge c3 \wedge \square\lozenge c4 $ soft constraints = $\square\lozenge r2$
+(\*) hard constraints = $\square\lozenge c2 \wedge \square\lozenge c3 \wedge \square\lozenge c4 $ soft constraints = $\square\lozenge r2$
+(\*\*) hard constraints = $\square\lozenge (r0 \wedge \lozenge (r5 \wedge \lozenge r4) \wedge (\square \lnot r3)) $ soft constraints = $\square\lnot r6$
