@@ -92,11 +92,10 @@ List of the experiments done
         - Unknown environment (node, doesn't affect plan)
         - Unknown environment (edge, doesn't affect plan)
         - Unknown environment (edge, does affect plan)
-        - Starting beta = 310, after IRL beta decrease (pass though r6)
+        - Starting beta = 310, after IRL beta decrease (pass though r6) (doesn't change the plan since the region r6 is not involved in the hard constraint requests) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_4.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_4.gif))
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r2 to r5 in 500 sec (feasible) (delay = 0s, extra cost = 100) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_1.gif))
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r2 to r5 in 10 sec (feasible, delay) (delay = 32s, extra cost = 100) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_2.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_2.gif))
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r5 to r3 in 500 sec (not feasible) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_3.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_3.gif))
-        - Temporal task: from r5 to r6 in 500 sec (feasible, does not change beta)
    2. ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Case 2: Surveillance Constraints 
       -  Without Human in the Loop
          - Starting beta = 0 ([motion animation](2D%20Grid/Hospital/Surveillance/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Surveillance/NO_HIL/control_1.gif))
