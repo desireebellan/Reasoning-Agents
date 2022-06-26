@@ -91,8 +91,8 @@ List of the experiments done
       - With Human in the Loop
         - Unknown environment (node, doesn't affect plan)
         - Unknown environment (edge, doesn't affect plan) (A door is been opened in between r5 and r4)
-        - Unknown environment (edge, does affect plan) (A door is been opened in between r5 and r4 and the hard constraint is been slightly modified (\*\*))
-        - Starting beta = 310, after IRL beta decrease (pass though r6) (doesn't change the plan since the region r6 is not involved in the hard constraint requests) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_4.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_4.gif))
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Unknown environment (edge, does affect plan) (A door is been opened in between r5 and r4) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_5.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_5.gif))
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 310, after IRL beta decrease (pass though r6) (doesn't change the plan since the region r6 is not involved in the hard constraint requests) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_4.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_4.gif))
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r2 to r5 in 500 sec (feasible) (delay = 0s, extra cost = 100) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_1.gif))
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r2 to r5 in 10 sec (feasible, delay) (delay = 32s, extra cost = 100) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_2.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_2.gif))
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r5 to r3 in 500 sec (not feasible) ([motion animation](2D%20Grid/Hospital/Delivery/HIL/robot_3.gif) and [graph animation](2D%20Grid/Hospital/Delivery/HIL/control_3.gif))
@@ -105,5 +105,3 @@ List of the experiments done
          
 
 (\*) hard constraints = $\square\lozenge c2 \wedge \square\lozenge c3 \wedge \square\lozenge c4 $ soft constraints = $\square\lozenge r2$
-
-(\*\*) hard constraints = $\square\lozenge (r0 \wedge \lozenge (r5 \wedge \lozenge r4)) \wedge (\square \lnot r3) $ soft constraints = $\square\lnot r6$
