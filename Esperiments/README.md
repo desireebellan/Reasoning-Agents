@@ -13,7 +13,6 @@ List of the experiments done
         - Temporal task: from r0 to r7 in 1000 sec (feasible)
         - Temporal task: from r0 to r7 in 10 sec (feasible with delay)
         - Temporal task: from r8 to r5 in 50 sec (not feasible)
-        - Modify smooth mix parameters: ds = 5 m and epsilon = 2 m 
    2. Case 2: Surveillance Contraints ([buchi automata hard constraints](ROS_Turtlebot/Hotel/Surveillance/buchi_hard.gif) and [soft constraints](ROS_Turtlebot/Hotel/Surveillance/buchi_soft.gif))
       
       hard_task = $ (\square\lozenge r2) \wedge (\square\lozenge r3) \wedge (\square\lozenge r8)$ 
@@ -56,8 +55,8 @@ List of the experiments done
         - Starting beta = 0 ([time t0](ROS_Turtlebot/Hospital/Surveillance/NO_HIL/t0_2.png), [time t](ROS_Turtlebot/Hospital/Surveillance/NO_HIL/t_2.png), [control plot](ROS_Turtlebot/Hospital/Surveillance/NO_HIL/control_2.png)
         
       - With Human in the Loop
-         - Unknown environment (node, doesn't affect plan)
-         - Unknown environment (edge, doesn't affect plan)
+         - *Unknown environment (node, doesn't affect plan)*
+         - *Unknown environment (edge, doesn't affect plan)*
          - Unknown environment (edge, does affect plan)
 # 2D Grid (done)
 1.Hotel Environment ([grid search](2D%20Grid/Hotel/map.gif))
