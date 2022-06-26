@@ -7,7 +7,7 @@ List of the experiments done
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30 and feasible soft constraint
         - Starting beta = 30 and unfeasible soft constraint ([time t0](ROS_Turtlebot/Hotel/Delivery/NO_HIL/t0_1.png), [time t](ROS_Turtlebot/Hotel/Delivery/NO_HIL/t_1.png), [control plot](ROS_Turtlebot/Hotel/Delivery/NO_HIL/control_1.png))
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0
-      - With Human in the Loop 
+      - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) With Human in the Loop 
         - Starting beta = 25, after IRL beta decrease (pass though c4)(beta goes from 25 to 13) ([time t0](ROS_Turtlebot/Hotel/Delivery/HIL/t0_1.png), [time t](ROS_Turtlebot/Hotel/Delivery/NO_HIL/t_1.png), [control plot](ROS_Turtlebot/Hotel/Delivery/HIL/control_1.png), [beta plot](ROS_Turtlebot/Hotel/Delivery/HIL/beta_1.png), [video](ROS_Turtlebot/Hotel/Delivery/HIL/video_1.png))
    2. Case 2: Surveillance Contraints ([buchi automata hard constraints](ROS_Turtlebot/Hotel/Surveillance/buchi_hard.gif) and [soft constraints](ROS_Turtlebot/Hotel/Surveillance/buchi_soft.gif))
       
@@ -15,11 +15,10 @@ List of the experiments done
       
       soft_task = $\square(c3 \implies (\lozenge r6))$
       
-      - Without Human in the Loop
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0
-        - Incomplete workspace: missing edge 
-        - Incomplete workspace: missing node
+      - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Without Human in the Loop
+        -  Starting beta = 30
+        -  Starting beta = 0
+        - *Incomplete workspace: missing node*
       - With Human in the Loop 
         - Starting beta = 0, after IRL beta increase (pass though r4) ([time t0](ROS_Turtlebot/Hotel/Surveillance/HIL/t0_1.png), [time t](ROS_Turtlebot/Hotel/Surveillance/HIL/t_1.png), [beta plot]() and [control plot]())
         - Temporal task: from r0 to r7 in 1000 sec (feasible)
