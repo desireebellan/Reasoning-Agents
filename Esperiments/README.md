@@ -5,10 +5,11 @@ List of the experiments done
    1. Case 1: Delivery Constraints
       - Without Human in the Loop
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 30 and feasible soft constraint
-        - Starting beta = 30 and unfeasible soft constraint ([time t0](ROS_Turtlebot/Hotel/Delivery/NO_HIL/t0_1.png), [time t](ROS_Turtlebot/Hotel/Delivery/NO_HIL/t_1.png), [control plot](ROS_Turtlebot/Hotel/Delivery/NO_HIL/control_1.png))
+        - *Starting beta = 30 and unfeasible soft constraint ([time t0](ROS_Turtlebot/Hotel/Delivery/NO_HIL/t0_1.png), [time t](ROS_Turtlebot/Hotel/Delivery/NO_HIL/t_1.png), [control plot](ROS_Turtlebot/Hotel/Delivery/NO_HIL/control_1.png))*
         - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Starting beta = 0
       - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) With Human in the Loop 
         - Starting beta = 25, after IRL beta decrease (pass though c4)(beta goes from 25 to 13) ([time t0](ROS_Turtlebot/Hotel/Delivery/HIL/t0_1.png), [time t](ROS_Turtlebot/Hotel/Delivery/NO_HIL/t_1.png), [control plot](ROS_Turtlebot/Hotel/Delivery/HIL/control_1.png), [beta plot](ROS_Turtlebot/Hotel/Delivery/HIL/beta_1.png), [video](ROS_Turtlebot/Hotel/Delivery/HIL/video_1.png))
+        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r0 to r7 in 10 sec (feasible with delay) (delay time= 46.62s, extra cost= 17.78) ([time t0](ROS_Turtlebot/Hotel/Delivery/HIL/t0_2.png), [control plot](ROS_Turtlebot/Hotel/Delivery/HIL/control_2.png), [video](ROS_Turtlebot/Hotel/Delivery/HIL/t_2.png))
    2. Case 2: Surveillance Contraints ([buchi automata hard constraints](ROS_Turtlebot/Hotel/Surveillance/buchi_hard.gif) and [soft constraints](ROS_Turtlebot/Hotel/Surveillance/buchi_soft.gif))
       
       hard_task = $ (\square\lozenge r2) \wedge (\square\lozenge r3) \wedge (\square\lozenge r8)$ 
@@ -22,8 +23,7 @@ List of the experiments done
       - With Human in the Loop 
         - Starting beta = 0, after IRL beta increase (pass though r4) ([time t0](ROS_Turtlebot/Hotel/Surveillance/HIL/t0_1.png), [time t](ROS_Turtlebot/Hotel/Surveillance/HIL/t_1.png), [beta plot]() and [control plot]())
         -  Temporal task: from r0 to r7 in 1000 sec (feasible) 
-        - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Temporal task: from r0 to r7 in 10 sec (feasible with delay) (delay time= 46.62s, extra cost= 17.78) ([time t0](ROS_Turtlebot/Hotel/Surveillance/HIL/t0_2.png), [time t](ROS_Turtlebot/Hotel/Surveillance/HIL/t_2.png),[control plot](), [video](ROS_Turtlebot/Hotel/Surveillance/HIL/t_2.png))
-
+        
 2. Hospital Environment
    1. Case 1: Delivery Constraints ([buchi automata](ROS_Turtlebot/Hospital/Delivery/buchi_hard.gif))
    
