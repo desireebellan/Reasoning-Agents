@@ -89,18 +89,20 @@ List of the experiments done
         - Starting beta = 0 ([motion animation](2D%20Grid/Hospital/Delivery/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Delivery/NO_HIL/control_1.gif))
         - Starting beta = 30 ([motion animation](2D%20Grid/Hospital/Delivery/NO_HIL/robot_2.gif) and [graph animation](2D%20Grid/Hospital/Delivery/NO_HIL/control_2.gif))
       - With Human in the Loop
+        - Unknown environment (node, doesn't affect plan)
+        - Unknown environment (edge, doesn't affect plan)
+        - Unknown environment (edge, does affect plan)
         - Starting beta = 310, after IRL beta decrease (pass though r6)
         - Temporal task: from r2 to r5 in 500 sec (feasible)
         - Temporal task: from r2 to r5 in 10 sec (feasible, delay)
         - Temporal task: from r5 to r3 in 500 sec (not feasible)
         - Temporal task: from r5 to r6 in 500 sec (feasible, does not change beta)
-   2. Case 2: Surveillance Constraints 
-      - ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Without Human in the Loop
-        -  Starting beta = 0 ([motion animation](2D%20Grid/Hospital/Surveillance/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Surveillance/NO_HIL/control_1.gif))
-        - Starting beta = 30 (\*) ([motion animation](2D%20Grid/Hospital/Surveillance/NO_HIL/robot_3.gif) and [graph animation](2D%20Grid/Hospital/Surveillance/NO_HIL/control_3.gif))
+   2. ![#f03c15](https://via.placeholder.com/15/f03c15/f03c15.png) Case 2: Surveillance Constraints 
+      -  Without Human in the Loop
+         - Starting beta = 0 ([motion animation](2D%20Grid/Hospital/Surveillance/NO_HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Surveillance/NO_HIL/control_1.gif))
+         - Starting beta = 110 (\*) ([motion animation](2D%20Grid/Hospital/Surveillance/NO_HIL/robot_3.gif) and [graph animation](2D%20Grid/Hospital/Surveillance/NO_HIL/control_3.gif))
       - With Human in the Loop
-         - Unknown environment (node, doesn't affect plan)
-         - Unknown environment (edge, doesn't affect plan)
-         - Unknown environment (edge, does affect plan)
+        - Starting beta = 0, after IRL beta increase to 13 (pass though r2) (it needs 2 run to learn the human behaviour) ([motion animation](2D%20Grid/Hospital/Surveillance/HIL/robot_1.gif) and [graph animation](2D%20Grid/Hospital/Surveillance/HIL/control_1.gif))
+         
 
 (*) hard constraints = $\square\lozenge c2 \wedge \square\lozenge c3 \wedge \square\lozenge c4 $ soft constraints = $\square\lozenge r2$
