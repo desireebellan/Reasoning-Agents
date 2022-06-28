@@ -19,7 +19,7 @@ List of the experiments done
       
       - Without Human in the Loop
         -  Starting beta = 30
-        -  Starting beta = 0
+        -  Starting beta = 0 ([time t0](ROS_Turtlebot/Hotel/Surveillance/NO_HIL/t0_1.png), [time t](ROS_Turtlebot/Hotel/Surveillance/NO_HIL/t_1.png), [control plot](ROS_Turtlebot/Hotel/Surveillance/NO_HIL/control_1.png))
         - *Incomplete workspace: missing node*
       - With Human in the Loop 
         - Starting beta = 15, after IRL beta increase (pass though r4) ([time t0](ROS_Turtlebot/Hotel/Surveillance/HIL/t0_1.png), [time t](ROS_Turtlebot/Hotel/Surveillance/HIL/t_1.png), [beta plot](ROS_Turtlebot/Hotel/Surveillance/HIL/beta_1.png) and [control plot](ROS_Turtlebot/Hotel/Surveillance/HIL/control_1.png))
