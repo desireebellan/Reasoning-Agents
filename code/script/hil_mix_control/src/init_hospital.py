@@ -47,8 +47,8 @@ def sys_model(case):
 
   if case == 1:
     # case one : delivery
-    hard_task = '([]<> (r0 && <> (r2 && <> r4) && ([]! r3)))'
-    soft_task = '([]! r6)'
+    hard_task = '([]<> (r0 && <> (r2 && <> r4) && ([] !r3)))'
+    soft_task = '([] !r6)'
 
   elif case == 2: 
     # case two : surveillance

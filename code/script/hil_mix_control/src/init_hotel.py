@@ -28,10 +28,10 @@ def sys_model(case):
 
   robot_motion = MotionFts(regions, set(ap), 'hotel' )
   robot_motion.set_initial(list(init_pose))
-  edges = [(0,2), (0,4), (0,9), (1,4), (1,2), 
+  edges = [(0,2), (0,4), (0,9), (1,4), (2,4),(1,2), 
           (2,4), (3,11), (5,8), (5,11), (5,12),
           (6,11),(7,9),(7,12),(8,12),(8,11),
-          (9,12),(11,12)]
+          (9,12),(11,12), (2,10), (10,11)]
   edge_list = [(loc[e[0]], loc[e[1]]) for e in edges]
   robot_motion.add_un_edges(edge_list, unit_cost = 2)
 
@@ -53,12 +53,15 @@ def sys_model(case):
 
   # case one : delivery
   if case == 1:
-    hard_task = '(([]<> (r0 && <> (r8 && <> r7))) && ([]<> (r2 && <> (r3 || r6))) && ([] !r5))'
-    soft_task = '([]! c4)'
+    # Pick up an object in r0 then move it to r8 and r7, 
+    # then pick up an object in r2 and bring it to r3 or r6
+    # while never stepping into r5
+    hard_task = '(([]! r5) && ([]<> (r0 && <> (r8 && <> r7))) && ([]<> (r2 && <> (r6 || r3))))'
+    soft_task = '([] !c4)'
   elif case == 2:
     # case two : surveillance
     hard_task = '(([]<> r2) && ([]<> r3) && ([]<> r8))'
-    soft_task = '([]<> (r4 -> (!r5 U r6)))'
+    soft_task = '([] <> r4)'
 
   return [robot_full_model, hard_task, soft_task]
 

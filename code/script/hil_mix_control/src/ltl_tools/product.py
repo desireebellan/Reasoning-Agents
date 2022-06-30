@@ -27,7 +27,9 @@ class ProdAut(DiGraph):
                                                                 self.add_edge(f_prod_node, t_prod_node, weight=total_weight, cost=cost, distance=dist)
                                                                 #print 'add edge', (f_prod_node, t_prod_node)
         print ('full product constructed with %d states and %s transitions' %(len(self.nodes), len(self.edges)))
-        
+  
+    # --------------------------------------------
+    # UPDATE PRODUCT AFTER A NEW EDGE HAS BEEN DISCOVERED      
     def update_after_edges_change(self, sense_info):
         # sense_info = {'label': set((x,y), l', l'_)), 'edge':(set(add_edges), set(del_edges))} 
         edge_info = sense_info['edge']
@@ -44,7 +46,29 @@ class ProdAut(DiGraph):
                     if truth:
                         total_weight = cost + self.graph['beta']*dist
                         self.add_edge(f_prod_node, t_prod_node, weight = total_weight, cost = cost, distance = dist)
+                        self.add_edge(t_prod_node, f_prod_node, weight = total_weight, cost = cost, distance = dist)
         print('product updated with %d states and %s transitions' %(len(self.nodes), len(self.edges)))
+        
+    # UPDATE PRODUCT AFTER A NEW REGION HAS BEEN DISCOVERED
+    def update_after_region_change(self, sense_info):
+        f_ts_node = sense_info['label']
+        for f_buchi_node in self.graph['buchi'].nodes:
+                f_prod_node = self.composition(f_ts_node, f_buchi_node)
+                #print 'f_prod_node' , (f_ts_node, f_buchi_node)
+                for t_ts_node in list(self.graph['ts'].successors(f_ts_node)):
+                    for t_buchi_node in list(self.graph['buchi'].successors(f_buchi_node)):
+                            t_prod_node = self.composition(t_ts_node, t_buchi_node)
+                            #print 't_prod_node' , (t_ts_node, t_buchi_node)
+                            label = self.graph['ts'].nodes[f_ts_node]['label']
+                            cost = self.graph['ts'].edges[f_ts_node, t_ts_node]['weight']
+                            truth, dist = check_label_for_buchi_edge(self.graph['buchi'], label, f_buchi_node, t_buchi_node)
+                            #print 'label,truth,total_weight', label,truth,total_weight
+                            if truth:
+                                                                total_weight = cost + self.graph['beta']*dist
+                                                                self.add_edge(f_prod_node, t_prod_node, weight=total_weight, cost=cost, distance=dist)
+                                                                #print 'add edge', (f_prod_node, t_prod_node)
+        print('product updated with %d states and %s transitions' %(len(self.nodes), len(self.edges)))
+    # -----------------------------------------------
         
                                               
     def build_full_margin(self, opt_path):

@@ -2,6 +2,7 @@
 
 from ltl_tools.product import ProdAut_Run
 from collections import defaultdict
+from tqdm import tqdm
 from networkx import dijkstra_predecessor_and_distance, has_path, shortest_simple_paths, shortest_path, all_simple_paths, dijkstra_path
 
 import time 
@@ -16,7 +17,7 @@ def dijkstra_plan_networkX(product, beta=10):
     runs = {}
     loop = {}
     # minimal circles
-    for prod_target in product.graph['accept']:
+    for prod_target in tqdm(product.graph['accept']):
                 #print 'prod_target', prod_target
                 # accepting state in self-loop
                 if prod_target in product.predecessors(prod_target):
@@ -334,8 +335,9 @@ def dijkstra_revise_once(product, run_segment, broken_edge_index):
 
 def has_path_to_accept(product, f_s):
         for acc in product.graph['accept']:
-                if has_path(product, f_s, acc):
-                        return True
+            print(acc)
+            if has_path(product, f_s, acc):
+                    return True
         return False
 
 def compute_path_cost(G, path):
@@ -345,6 +347,7 @@ def compute_path_cost(G, path):
         return cost
         
 def add_temp_task(product, run, index, segment, reg_s, reg_g, t_sg):
+    
         if segment == 'line':
                 new_pre = run.prefix[index:] + run.suffix
         elif segment == 'loop':
@@ -356,7 +359,7 @@ def add_temp_task(product, run, index, segment, reg_s, reg_g, t_sg):
         eval = 10000     
         # debug
         new_s, new_g = None, None
-        print(K)
+        best_extra, best_delay = 0.0, 0.0
         for s in range(K-2):
                 for g in range(s,K-1):
                         extra_cost = 0.0
@@ -386,8 +389,10 @@ def add_temp_task(product, run, index, segment, reg_s, reg_g, t_sg):
                                 eval = new_eval
                                 new_s = s
                                 new_g = g
-        print('delay time : {}'.format(delay_time))
-        print('extra cost: {}'.format(extra_cost))
+                                best_extra = extra_cost
+                                best_delay = delay_time
+        print('delay time : {}'.format(best_delay))
+        print('extra cost: {}'.format(best_extra))
         if new_s != None and new_g != None:
             g, s = new_g, new_s
         print ('Best index s and g found: (s, g) = (%d, %d)' %(s, g))       

@@ -9,14 +9,19 @@ from ltl_tools.planner import ltl_planner
 from math import sqrt, hypot, exp
 from networkx import shortest_path
 from hil_mix_control.msg import Task
-from signal import SIGTSTP
+from tqdm import tqdm
+from PIL import Image 
 
 import matplotlib.pyplot as plt
 import numpy as np
+import networkx as nx
 
 import pickle
 import copy
-import subprocess
+import imageio
+import os
+import io
+
 
 show_animation = True
 
@@ -49,9 +54,15 @@ class Mapping:
         self.build_graph()
         
     def build_graph(self):
-        global ax1
+        
         open_set, closed_set, edges = [], [], []
         open_set.append([self.min_x + self.robot_radius, self.min_y + self.robot_radius])
+        
+        fig = plt.figure(1)
+        #extent = fig.get_axes()[0].get_window_extent().transformed(fig.dpi_scale_trans.inverted())
+                
+        writer = imageio.get_writer('map.gif', mode='I')
+        
         while 1:
             search_set = copy.deepcopy(open_set)
             rx, ry = [], []        
@@ -68,7 +79,13 @@ class Mapping:
                 closed_set.append(node)  
                 
             #plt.scatter(rx,ry,color = "lightgrey", marker = 'x')        
-            ax1.scatter(rx,ry,color = "lightgrey", marker = 'x')   
+            fig.get_axes()[0].scatter(rx,ry,color = "lightgrey", marker = 'x') 
+            #fig.savefig('./images/map.png', bbox_inches=extent)
+            fig.savefig('./images/map.png')
+            image = imageio.imread('./images/map.png')
+            writer.append_data(image)
+            os.remove('./images/map.png')
+            #i += 1
             plt.pause(0.001) 
                      
             if len(open_set) == 0:
@@ -76,6 +93,8 @@ class Mapping:
         closed_set = [(node[0],node[1]) for node in closed_set]
         edges = [((edge[0][0],edge[0][1]),(edge[1][0],edge[1][1])) for edge in edges]
         self.map = MotionMap(closed_set, edges)
+        
+        writer.close()
         
     def search(self, position, goal):
         source = min(self.map.nodes, key = lambda x: distance(position,x))
@@ -103,7 +122,6 @@ class Mapping:
         return True
 
     def check_pose(self, pose):
-        px, py = pose[1][0], pose[1][1]
         nearest_obs = min(self.obstacle_pos, key = lambda x: distance(pose[1],x))
         if distance(pose[1],nearest_obs) <= self.robot_radius:
             return False
@@ -173,12 +191,10 @@ def rho(s):
         return 0
         
 def smooth_mix(tele_control, navi_control, dist_to_trap):
-    ds = 5
-    epsilon = 1.6
+    ds = 5#m
+    epsilon = 3#m
     mix_control = [0, 0]
     gain = rho(dist_to_trap-ds)/(rho(dist_to_trap-ds)+rho(epsilon+ds-dist_to_trap))
-    # mix_control[0] = navi_control[0] + gain*tele_control[0]
-    # mix_control[1] = navi_control[1] + gain*tele_control[1]
     mix_control[0] = (1-gain)*navi_control[0] + gain*tele_control[0]
     mix_control[1] = (1-gain)*navi_control[1] + gain*tele_control[1]
     return mix_control, gain
@@ -188,12 +204,31 @@ def velocity(vel_xy):
 
 def onclick(event, model = 'hotel'):
     if event == 'escape':
+        global robot_frames, control_frames, planner
+        '''
+        control_extent = plt.gcf().get_axes()[1].get_window_extent().transformed(plt.gcf().dpi_scale_trans.inverted())
+        robot_extent = plt.gcf().get_axes()[0].get_window_extent().transformed(plt.gcf().dpi_scale_trans.inverted())
+        '''
+        #plt.figure(2).savefig('control.png')
+        if len(control_frames) != 0:
+            control_frames[-1].save("control.png", format="png")  
+            robot_frames[0].save("robot.gif", format="GIF", append_images = robot_frames, save_all=True, duration=100, loop=0)
+            control_frames[0].save("control.gif", format="GIF", append_images = control_frames, save_all=True, duration=100, loop=0)  
+        #plt.close('all')
+        labels = {reg:list(planner.product.graph['ts'].graph['region'].nodes[reg]['label'])[0] 
+              for reg in planner.product.graph['ts'].graph['region'].nodes }
+        fig3 = plt.figure(3)
+        ax3 = plt.subplot(111)
+        nx.draw_kamada_kawai(planner.product.graph['ts'].graph['region'], with_labels = True, 
+                     labels = labels, node_size = 600, font_size = 10, node_color = '#b3ffcc', arrows = True, ax = ax3)
+        fig3.savefig('final_graph.png')
+        plt.show()      
         return exit(0)
     elif event == 't':   
         global temp_task    
         taskdata = taskCall(model)             
         s_x = taskdata.sx
-        s_y = taskdata.sx
+        s_y = taskdata.sy
         g_x = taskdata.gx
         g_y = taskdata.gy    
         tsg = taskdata.tsg
@@ -224,10 +259,10 @@ def taskCall(model = 'hotel'):
             'c1', 'c2', 'c3',
             'c4']
             loc = [(15.00, 15.00), (75.00, 10.00), (110.00, 15.00),
-                (165.00, 20.00), (70.00, 45.00), (130.00, 45.00),
-                (180.00, 45.00), (25.00, 80.00), (105.00, 80.00),
-                (15.00, 50.00), (100.00, 50.00), (160.00, 50.00),
-                (70.00, 70.00)]
+               (165.00, 20.00), (70.00, 45.00), (130.00, 45.00),
+               (180.00, 45.00), (25.00, 80.00), (105.00, 80.00),
+               (15.00, 50.00), (100.00, 50.00), (160.00, 50.00),
+               (70.00, 70.00)]
         elif model == "hospital":
             ap = ['r0', 'r1', 'r2',
                 'r3', 'r4', 'r5',
@@ -260,8 +295,8 @@ def navVelCall(path, pose):
     dx = (x1 - x0)/L
     navi_control = [dx,dy]
     
-def hil_planner(sys_model, initial_beta, robot_name='2D_agent', model_name = 'test'):
-    global robot_pose, navi_control, tele_control, temp_task, ax1
+def hil_planner(sys_model, initial_beta, robot_name='2D_agent', model_name = 'test', case = 1):
+    global robot_pose, navi_control, tele_control, temp_task, robot_frames, control_frames, planner
     robot_full_model, hard_task, soft_task, obstacle = sys_model
     robot_pose = [0, [0, 0]]
     navi_control = [0, 0]
@@ -272,15 +307,15 @@ def hil_planner(sys_model, initial_beta, robot_name='2D_agent', model_name = 'te
     temp_task_s = False
     temp_task_g = False
     flag_task_incop = False
+    new_ws = False
     print ('Robot %s: ltl_planner started!' %(robot_name))
     planner = ltl_planner(robot_full_model, hard_task, soft_task, initial_beta, robot_name)
-    print('planner initialized')
     ####### initial plan synthesis
     planner.optimal()
     print ('Original beta:', initial_beta)
     print ('Initial optimal plan', planner.run.suf_plan)
     #######
-    reach_bound = 5.0 # m
+    reach_bound = 3.0 # m
     hi_bound = 0.1
     hi_bool = False
     hil = False
@@ -297,6 +332,18 @@ def hil_planner(sys_model, initial_beta, robot_name='2D_agent', model_name = 'te
     controlLists = [[0.0],[0.0],[0.0]]
     # temporal task control
     temp_control = 0
+    # REGION SEARCH
+    margin = 25#m
+    
+    labels = {reg:list(planner.product.graph['ts'].graph['region'].nodes[reg]['label'])[0] 
+              for reg in planner.product.graph['ts'].graph['region'].nodes }
+    nx.draw_kamada_kawai(planner.product.graph['ts'].graph['region'], with_labels = True, 
+                     labels = labels, node_size = 600, font_size = 10, node_color = '#b3ffcc', arrows = True)
+    plt.show()
+    # GIF   
+    line, point, temp_text, temp_text_s, temp_text_g = None, None, None, None, None
+   
+    control_frames, robot_frames = [], []
     
     robot_pose[1] = [list(node) for node in planner.product.graph['ts'].graph['region'].graph['initial']][0]
     pre_reach_ts = None
@@ -306,29 +353,56 @@ def hil_planner(sys_model, initial_beta, robot_name='2D_agent', model_name = 'te
     robot_radius = 3.0  # [m]
     
     # PLOTTING 
-    fig, (ax1, ax2) = plt.subplots(2, 1)
+    #fig, (ax1, ax2) = plt.subplots(2, 1)
+    fig1 = plt.figure(1)
+    ax1 = plt.subplot(111)   
+    fig2 = plt.figure(2)
+    ax2 = plt.subplot(111)
     
     #plt.plot(ox, oy, '.k')
     # plt.grid(True)
     # plt.axis("equal")
     ax1.plot(ox, oy, '.k')
-    ax1.grid(True)
+    ax2.grid(True)
     ax1.axis("equal")
+    ax1.set_xlim(round(min(ox)) - 10, round(max(ox)) + 10)
        
     #plt.gcf().canvas.mpl_connect('key_press_event', lambda event: onclick(event.key, model_name))
-    fig.canvas.mpl_connect('key_press_event', lambda event: onclick(event.key, model_name))
+    fig1.canvas.mpl_connect('key_press_event', lambda event: onclick(event.key, model_name))
+    fig2.canvas.mpl_connect('key_press_event', lambda event: onclick(event.key, model_name))
     
     mapGraph = Mapping(ox, oy, grid_size, robot_radius)
     
+    for node in planner.product.graph['ts'].graph['region'].nodes:
+        ax1.add_patch(plt.Circle(node,1,color = 'm', fill = False))
+
     t0 = time()
-    line = None
-    
     while 1:
         try:
             t = time()-t0
             print ('----------Time: %.2f----------' %t)
             A_robot_pose.append(list(robot_pose))            
             A_control.append([tele_control, navi_control, mix_control, temp_control])
+            
+            print('robot pose {}'.format(robot_pose))
+            
+            # check if a new region has been discovered
+            if planner.check_region(robot_pose[1], margin):
+                print('Visiting known region')
+            else:
+                print('Visiting new region')
+                new_ws = True
+                new_region = (round(robot_pose[1][0],0), round(robot_pose[1][1],0))
+                planner.update_workspace(['region', new_region])
+                
+                if planner.check_edge(pre_reach_ts, reach_ts):     
+                    print('edge already existing')          
+                else:
+                    #update workspace
+                    print('edge not already existing')
+                    print('update workspace')
+                    planner.update_workspace(['edge', pre_reach_ts, (new_region,'None')])              
+                ax1.add_patch(plt.Circle((new_region[0], new_region[1]), 1, color = 'm', fill = False))
             
             # robot past path update
             reach_ts = planner.reach_ts_node(robot_pose[1], reach_bound)
@@ -343,21 +417,17 @@ def hil_planner(sys_model, initial_beta, robot_name='2D_agent', model_name = 'te
                 # correct errors when robot pose lies in between of two nodes            
                 if pre_reach_ts == None:
                     pre_reach_ts = reach_ts
-                #prev_navi_control = navi_control
-                # stop the robot while the algorithm is running
-                #SendMix(MixPublisher,[0.0,0.0])
+
                 # check if the visited edge belongs to the workspace
                 if planner.check_edge(pre_reach_ts, reach_ts):     
                     print('edge already existing')          
-                    reachable_prod_states = planner.update_reachable(reachable_prod_states, reach_ts)
-                    posb_runs = planner.update_runs(posb_runs, reach_ts)
                 else:
                     #update workspace
                     print('edge not already existing')
                     print('update workspace')
-                    planner.update_workspace(pre_reach_ts, reach_ts)
-                    reachable_prod_states = planner.update_reachable(reachable_prod_states, reach_ts)
-                    posb_runs = planner.update_runs(posb_runs, reach_ts)
+                    planner.update_workspace(['edge',pre_reach_ts, reach_ts])
+                reachable_prod_states = planner.update_reachable(reachable_prod_states, reach_ts)
+                posb_runs = planner.update_runs(posb_runs, reach_ts)
                 # restart the robot
                 # since the number of runs can be extremely long, and consiquently time consuming to compute, they are evaluated
                 # any time the region is updated
@@ -367,7 +437,7 @@ def hil_planner(sys_model, initial_beta, robot_name='2D_agent', model_name = 'te
                 reach_new = True
             else:
                 reach_new = False
-        
+            print(reachable_prod_states)
             #------------------------------
             # mix control inputs
             
@@ -393,19 +463,18 @@ def hil_planner(sys_model, initial_beta, robot_name='2D_agent', model_name = 'te
             controlLists[0].append(velocity(navi_control))
             controlLists[1].append(velocity(tele_control))
             controlLists[2].append(velocity(mix_control))
-            print ('robot_path:', robot_path)
+            #print ('robot_path:', robot_path)
             # print 'reachable_prod_states', reachable_prod_states
             # #------------------------------
             # estimate human preference, i.e. beta
             # and update discrete plan
-            print('index %d' %(planner.index))
-            print('segment %s' %(planner.segment))
+            print('segment %s index %d ' %(planner.segment, planner.index))
             
             if ((reach_new) and (planner.start_suffix())):
                 print ('reachable_prod_states', reachable_prod_states)
                 prev_navi_control = navi_control
                 #SendMix(MixPublisher,[0.0,0.0])
-                if hi_bool:
+                if hi_bool and not new_ws:
                     print ('------------------------------')
                     print ('---------- In IRL mode now ----------')
                     est_beta_seq, match_score = planner.irl_jit(posb_runs)
@@ -414,6 +483,12 @@ def hil_planner(sys_model, initial_beta, robot_name='2D_agent', model_name = 'te
                     hi_bool = False
                     A_beta.append(est_beta_seq)
                     print ('------------------------------')
+                elif hi_bool and new_ws:
+                    planner.optimal(style='ready')
+                    opt_suffix = list(planner.run.suffix)
+                    planner.set_to_suffix()
+                    print ('opt_suffix updated to %s' %str(opt_suffix))
+                    print ('-----------------')
                 print ('--- New suffix execution---')     
                 #SendMix(MixPublisher,list(prev_navi_control))         
                 robot_path = [reach_ts]
@@ -423,20 +498,34 @@ def hil_planner(sys_model, initial_beta, robot_name='2D_agent', model_name = 'te
             # satisfy temporary task
             if temp_task:
                 if not flag_task_incop:
-                    planner.add_temp_task(temp_task)
-                    flag_task_incop = True
-                    t_temp = time() - t0
-                reg_s = (temp_task[0], temp_task[1])
-                reg_g = (temp_task[2], temp_task[3])
+                    if temp_text != None:
+                        temp_text.remove()
+                    if temp_text_s != None:
+                        temp_text_s.remove()
+                    if temp_text_g != None:
+                        temp_text_g.remove()
+                    reg_s = (temp_task[0], temp_task[1])
+                    reg_g = (temp_task[2], temp_task[3])
+                    if planner.check_node(reg_s) and planner.check_node(reg_g):
+                        planner.add_temp_task(temp_task)
+                        flag_task_incop = True
+                        temp_text = ax1.text(0, 117,'Temporary Task: from ({},{}) to ({},{}) in {} sec'.format(temp_task[0], temp_task[1],temp_task[2], temp_task[3], temp_task[4]))
+                        t_temp = time() - t0
+                    else: 
+                        temp_task = None
+                        temp_text = ax1.text(0, 117,r"Task <>({} && <> {}) is unfeasible""\n"r"cannot be executed".format(reg_s, reg_g))
+                            
                 if ((reach_ts) and (reach_ts[0] == reg_s) and (pre_reach_ts[0] != reg_s)):
                     temp_task_s = True
                     time_s = t - t_temp
                     temp_control = 1
-                    print ('robot reaches pi_s in the temp task:{} in {} seconds'.format(reg_s, time_s))
+                    #print ('robot reaches pi_s in the temp task:{} in {} seconds'.format(reg_s, time_s))
+                    temp_text_s = ax1.text(0, 110,'Reaches {} in {:.2f} seconds'.format(reg_s, time_s))
                 if (temp_task_s) and ((reach_ts) and (reach_ts[0] == reg_g)):
                     temp_task_g = True
                     time_g = t - t_temp
-                    print ('robot reaches pi_g in the temp task:{} in {} seconds'.format(reg_g, time_g))
+                    #print ('robot reaches pi_g in the temp task:{} in {} seconds'.format(reg_g, time_g))
+                    temp_text_g = ax1.text(0, 100,'Reaches {} in {:.2f} seconds'.format(reg_g, time_g))
                 if (temp_task_s) and (temp_task_g):
                     print ('robot accomplished temporary task <>({} && <> {}) in {} seconds'.format(reg_s, reg_g, time_g-time_s))
                     temp_task = None
@@ -461,28 +550,22 @@ def hil_planner(sys_model, initial_beta, robot_name='2D_agent', model_name = 'te
             else: 
                 if line:
                     line.remove()
+                if point:
+                    point.remove()
                 s = robot_pose[1]  
                 g = list(current_goal)                        
-                rx, ry = mapGraph.search((s[0], s[1]), (g[0], g[1]))
-                #line, = plt.plot(rx, ry, ':k')
+                rx, ry = mapGraph.search(((s[0]), s[1]), (g[0], g[1]))
                 line, = ax1.plot(rx, ry, ':k')
                 
+                # update robot figure
+                plt.figure(1)
+                
                 if hil:
-                    #point, = plt.plot(robot_pose[1][0], robot_pose[1][1], "or") 
                     point, = ax1.plot(robot_pose[1][0], robot_pose[1][1], "or") 
                 elif temp_control == 1:
-                    #point, = plt.plot(robot_pose[1][0], robot_pose[1][1], "og")
                     point, = ax1.plot(robot_pose[1][0], robot_pose[1][1], "og")
                 else:
-                    #point, = plt.plot(robot_pose[1][0], robot_pose[1][1], "ob")
                     point, = ax1.plot(robot_pose[1][0], robot_pose[1][1], "ob")
-                    
-                nav, = ax2.plot(controlLists[0], linestyle='--',linewidth=2.0,
-                                color='blue',label=r'$u_r[v]$',zorder = 3)
-                tele, = ax2.plot(controlLists[1], linestyle='--',linewidth=2.0, 
-                                 color='red',label=r'$u_h[v]$',zorder = 4)
-                mix, = ax2.plot(controlLists[2], linestyle='-',linewidth=2.0,
-                               color='black',label=r'$u[v]$',zorder = 2)
                                
                 navVelCall([rx,ry],s)
                 robot_pose[1][0] += mix_control[0]
@@ -492,27 +575,37 @@ def hil_planner(sys_model, initial_beta, robot_name='2D_agent', model_name = 'te
                     robot_pose[1][1] -= mix_control[1]
                 
                 print('Goal %s sent to %s.' %(str(current_goal),str(robot_name)))
-                print('robot pose {}'.format(robot_pose))
+                              
+                text_nav = ax1.text(-20,130,'navi. control = ({:.2f},{:.2f})'.format(navi_control[0],navi_control[1]))
+                text_mix = ax1.text(70, 130, 'mix control: ({:.2f},{:.2f})'.format(mix_control[0], mix_control[1]))
+                text_tele = ax1.text(150, 130, 'hil control: ({:.2f},{:.2f})'.format(tele_control[0], tele_control[1]))
+                text_beta = ax1.text(80, -20, 'BETA: {:.2f}'.format(planner.beta))
                 
-                #text_nav = plt.text(0,-20,'navi. control = ({:.2f},{:.2f})'.format(navi_control[0],navi_control[1]))
-                #text_mix = plt.text(90, -20, 'mix control: ({:.2f},{:.2f})'.format(mix_control[0], mix_control[1]))
-                #text_tele = plt.text(0, -40, 'hil control: ({:.2f},{:.2f})'.format(tele_control[0], tele_control[1]))
+                plt.pause(0.001)    
                 
-                text_nav = ax1.text(0,-20,'navi. control = ({:.2f},{:.2f})'.format(navi_control[0],navi_control[1]))
-                text_mix = ax1.text(90, -20, 'mix control: ({:.2f},{:.2f})'.format(mix_control[0], mix_control[1]))
-                text_tele = ax1.text(150, -20, 'hil control: ({:.2f},{:.2f})'.format(tele_control[0], tele_control[1]))
+                robot_frames.append(Image.fromarray(np.array(fig1.canvas.renderer.buffer_rgba())))
                 
-                ax2.legend(ncol=3,loc='upper left',borderpad=0.1, labelspacing=0.2, columnspacing= 0.5)
-                
-                
-                plt.pause(0.1)
-                point.remove()  
                 text_nav.remove()
                 text_mix.remove()
                 text_tele.remove()
+                text_beta.remove()
+                                            
+                # update control figure  
+                plt.figure(2)
+                  
+                nav, = ax2.plot(controlLists[0], linestyle='--',linewidth=2.0, color='blue',label=r'$u_r[v]$',zorder = 3)
+                tele, = ax2.plot(controlLists[1], linestyle='--',linewidth=2.0, color='red',label=r'$u_h[v]$',zorder = 4)
+                mix, = ax2.plot(controlLists[2], linestyle='-',linewidth=2.0, color='black',label=r'$u[v]$',zorder = 2)
+                
+                ax2.legend(ncol=3,loc='upper left',borderpad=0.1, labelspacing=0.2, columnspacing= 0.5)
+                
+                plt.pause(0.001)
+                
+                control_frames.append(Image.fromarray(np.array(fig2.canvas.renderer.buffer_rgba()))) 
+                
                 nav.remove()
                 tele.remove()
-                mix.remove()
+                mix.remove()    
                                      
         except KeyboardInterrupt:
             pickle.dump([A_robot_pose, A_control, A_beta], open('/home/desiree/catkin_ws/src/mix_initiative/hil_mix_control/src/data/turtlebot_{}.p'.format(model_name), 'wb'))
@@ -545,4 +638,4 @@ if __name__ == "__main__":
     from init_2d import sys_model
     system_model = sys_model(case = case, model = model)
     
-    hil_planner(system_model, beta, model_name = model)
+    hil_planner(system_model, beta, model_name = model, case = case)

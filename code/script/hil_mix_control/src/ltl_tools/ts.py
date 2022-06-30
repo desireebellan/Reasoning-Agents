@@ -4,6 +4,7 @@ from ltl_tools.boolean_formulas.parser import parse as parse_guard
 
 from math import sqrt
 from networkx.classes.digraph import DiGraph
+import networkx as nx
 
 
 
@@ -47,6 +48,9 @@ class MotionMap(DiGraph):
 class MotionFts(DiGraph):
     def __init__(self, node_dict, symbols, ts_type):
         DiGraph.__init__(self, symbols=symbols, type=ts_type, initial=set())
+        
+        self.new_reg_count = 0
+        
         for (n, label) in node_dict.items():
             self.add_node(n, label=label, status='confirmed')
             
@@ -112,14 +116,26 @@ class MotionFts(DiGraph):
             self.node[close_node]['status'] = 'notconfirmed'
         return changed_regs
     '''
+    def update_after_region_change(self, sense_info, margin = 10):
+        # sense_info = {'label':set(region)} 
+        reg = sense_info['label']
+        #close_node = self.closest_node(reg)
+        #if distance(close_node,reg) > margin:
+        label = set(['{}'.format(self.new_reg_count),])
+        self.new_reg_count += 1
+        self.add_node(tuple(reg[0]), label = label, status='confirmed')
+        self.add_edge(tuple(reg[0]), tuple(reg[0]), weight=0)
+        print('region graph updated: %d states and %s transitions' %(len(self.nodes), len(self.edges)))
     
     def update_after_edges_change(self, sense_info):
         # sense_info = {'edge':(set(add_edges), set(del_edges))} 
         edge_info = sense_info['edge']
         for e in edge_info[0]:
             self.add_edge(e[0][0], e[1][0], weight=distance(e[0][0], e[1][0]))
+            self.add_edge(e[1][0], e[0][0], weight=distance(e[0][0], e[1][0]))
         for e in edge_info[1]:
             self.remove_edge(e[0], e[1])
+            self.remove_edge(e[1], e[0])
         print('region graph updated: %d states and %s transitions' %(len(self.nodes), len(self.edges)))
             
 class ActionModel(object):
@@ -184,7 +200,30 @@ class MotActModel(DiGraph):
                     prod_node_to = self.composition(reg_to, 'None')
                     self.add_edge(prod_node, prod_node_to, weight=self.graph['region'][reg][reg_to]['weight'], label= 'goto', marker= 'visited')
         print ('full_model constructed with %d states and %s transitions' %(len(self.nodes()), len(self.edges())) )
+    
+    # -----------------------------------
+    # CHANGE REGIONS
+    def update_after_region_change(self, sense_info):
+            reg = sense_info['label']
+            reg = (tuple(reg[0]))
+            for act in self.graph['action'].action:
+                prod_node = self.composition(reg, act)
+                # # actions
+                if (act == 'None'):
+                    label = self.graph['region'].nodes[reg]['label']
+                    for act_to in self.graph['action'].allowed_actions(label):
+                        prod_node_to = self.composition(reg, act_to)
+                        if act_to != 'None':
+                            self.add_edge(prod_node, prod_node_to, weight=self.graph['action'].action[act_to][0], label= act_to, marker= 'visited')
+                        else:
+                            self.add_edge(prod_node, prod_node_to, weight=self.graph['action'].action[act_to][0], label= 'goto', marker= 'visited')
+                # motions
+                for reg_to in list(self.graph['region'].successors(reg)):
+                    prod_node_to = self.composition(reg_to, 'None')
+                    self.add_edge(prod_node, prod_node_to, weight=self.graph['region'][reg][reg_to]['weight'], label= 'goto', marker= 'visited')
+            print('model updated with %d states and %s transitions' %(len(self.nodes), len(self.edges)))
         
+    # CHANGE EDGES    
     def update_after_edges_change(self, sense_info):
         edge_info = sense_info['edge']
         for e in edge_info[0]:
@@ -193,7 +232,8 @@ class MotActModel(DiGraph):
             reg = prod_node[0]
             reg_to = prod_node_to[0]
             self.add_edge(prod_node, prod_node_to, weight = self.graph['region'].edges[reg,reg_to]['weight'], label = 'goto', marker = 'visited')
-        print('mode updated with %d states and %s transitions' %(len(self.nodes), len(self.edges)))
+            self.add_edge(prod_node_to, prod_node, weight = self.graph['region'].edges[reg_to,reg]['weight'], label = 'goto', marker = 'visited')
+        print('model updated with %d states and %s transitions' %(len(self.nodes), len(self.edges)))
     
     def fly_successors_iter(self, prod_node): 
         reg, act = self.projection(prod_node)

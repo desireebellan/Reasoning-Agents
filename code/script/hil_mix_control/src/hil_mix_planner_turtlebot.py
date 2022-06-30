@@ -216,7 +216,7 @@ def hil_planner(sys_model, initial_beta, robot_name='turtlebot', model_name = 'h
                     #update workspace
                     print('edge not already existing')
                     print('update workspace')
-                    planner.update_workspace(pre_reach_ts, reach_ts)
+                    planner.update_workspace(['edge',pre_reach_ts, reach_ts])
                     reachable_prod_states = planner.update_reachable(reachable_prod_states, reach_ts)
                     posb_runs = planner.update_runs(posb_runs, reach_ts)
                 # restart the robot
@@ -286,6 +286,7 @@ def hil_planner(sys_model, initial_beta, robot_name='turtlebot', model_name = 'h
                     t_temp = rospy.Time.now() - t0
                 reg_s = (temp_task[0], temp_task[1], 0.00)
                 reg_g = (temp_task[2], temp_task[3], 0.00)
+                
                 if ((reach_ts) and (reach_ts[0] == reg_s) and (pre_reach_ts[0] != reg_s)):
                     temp_task_s = True
                     time_s = t.to_sec() - t_temp.to_sec()
